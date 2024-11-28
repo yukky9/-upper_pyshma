@@ -3,7 +3,7 @@ import AddSociety from "../buttons/AddSociety/AddSociety";
 
 const TableSociety = () => {
     return (
-        <div className="relative overflow-x-auto mt-48 -ml-96">
+        <div className="relative overflow-x-auto mt-40 -ml-96">
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead className="text-sm text-gray-700 uppercase bg-gray-100 dark:bg-white dark:text-gray-950">
                 <tr>

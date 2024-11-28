@@ -4,7 +4,8 @@ import FirstPage from "../pages/FirstPage";
 import SecondPage from "../pages/SecondPage";
 import ThirdPage from "../pages/ThirdPage";
 import CreateNews from "../modal_pages/CreateNews";
-import CreateSocietyAndEvents from "../modal_pages/CreateSocietyAndEvents";
+import CreateEvents from "../modal_pages/CreateEvents";
+import CreateSociety from "../modal_pages/CreateSociety";
 
 
 const MainRouter = () => {
@@ -15,7 +16,8 @@ const MainRouter = () => {
                 <Route path="/events" element={<SecondPage/>} />
                 <Route path="/society" element={<ThirdPage/>} />
                 <Route path="/createnewnews" element={<CreateNews/>} />
-                <Route path="/createnew" element={<CreateSocietyAndEvents/>} />
+                <Route path="/createnewevents" element={<CreateEvents/>} />
+                <Route path="/createnewsociety" element={<CreateSociety/>} />
             </Routes>
         </BrowserRouter>
     );

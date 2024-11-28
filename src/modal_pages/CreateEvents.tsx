@@ -1,10 +1,10 @@
 import React from 'react';
-import TimeInput from "../components/Inputs/TimeInput/TimeInput";
 import SendButton from "../components/buttons/SendButton/SendButton";
+import TimeInput from "../components/Inputs/TimeInput/TimeInput";
 
-const CreateNews = () => {
+const CreateEvents = () => {
     return (
-        <div className="overflow-y-auto overflow-x-hidden top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div className="relative p-4 w-full max-w-md max-h-full">
                 <div className="relative bg-white rounded-lg shadow">
                     <div
@@ -12,7 +12,7 @@ const CreateNews = () => {
                         <h3 className="text-lg font-semibold text-black">
                             Создание нового мероприятия!
                         </h3>
-                        <button type="button" onClick={() => window.location.href = '/news'}
+                        <button type="button" onClick={() => window.location.href = '/events'}
                                 className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
                                 data-modal-toggle="crud-modal">
                             <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -39,6 +39,11 @@ const CreateNews = () => {
                                           className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                                           placeholder="Введите описание..."></textarea>
                             </div>
+                            <div className="col-span-2">
+                                <label htmlFor="description"
+                                       className="block mb-2 text-sm font-medium text-gray-900">Дата/время</label>
+                                <TimeInput/>
+                            </div>
                         </div>
                         <SendButton/>
                     </form>
@@ -48,4 +53,4 @@ const CreateNews = () => {
     );
 };
 
-export default CreateNews;
+export default CreateEvents;

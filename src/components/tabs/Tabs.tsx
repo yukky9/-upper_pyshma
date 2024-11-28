@@ -1,4 +1,5 @@
 import React from 'react';
+import Line from "../add_img/Line";
 
 const Tabs = () => {
     return (

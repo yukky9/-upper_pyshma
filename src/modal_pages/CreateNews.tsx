@@ -1,16 +1,15 @@
 import React from 'react';
-import TimeInput from "../components/Inputs/TimeInput/TimeInput";
 import SendButton from "../components/buttons/SendButton/SendButton";
 
 const CreateNews = () => {
     return (
-        <div className="overflow-y-auto overflow-x-hidden top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div className="place-items-center place-content-center overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div className="relative p-4 w-full max-w-md max-h-full">
                 <div className="relative bg-white rounded-lg shadow">
                     <div
                         className="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
                         <h3 className="text-lg font-semibold text-black">
-                            Создание нового мероприятия!
+                            Создание новой новости!
                         </h3>
                         <button type="button" onClick={() => window.location.href = '/news'}
                                 className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"

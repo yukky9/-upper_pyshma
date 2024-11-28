@@ -1,6 +1,7 @@
 import React from 'react';
 import SendButton from "../components/buttons/SendButton/SendButton";
 import TimeInput from "../components/Inputs/TimeInput/TimeInput";
+import AddImg from "../components/add_img/AddImg";
 
 const CreateEvents = () => {
     return (
@@ -24,7 +25,8 @@ const CreateEvents = () => {
                         </button>
                     </div>
                     <form className="p-4 md:p-5">
-                        <div className="grid gap-4 mb-4 grid-cols-2">
+                        <AddImg/>
+                        <div className="grid gap-4 mb-4 mt-3 grid-cols-2">
                             <div className="col-span-2">
                                 <label htmlFor="name"
                                        className="block mb-2 text-sm font-medium text-gray-900">Название</label>

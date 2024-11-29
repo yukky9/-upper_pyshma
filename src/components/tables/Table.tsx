@@ -21,155 +21,75 @@ const Table = () => {
                 <tbody>
                 <tr className="bg-white">
                     <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        Apple MacBook Pro 17"
+                        Хакатон
                     </th>
                     <td className="px-6 py-4">
-                        1
+                        11.12.2020
                     </td>
                 </tr>
                 <tr className="bg-white">
                     <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        Apple MacBook Pro 17"
+                        Новое направление
                     </th>
                     <td className="px-6 py-4">
-                        1
+                        11.12.2020
                     </td>
                 </tr>
                 <tr className="bg-white">
                     <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        Apple MacBook Pro 17"
+                        Хакатон
                     </th>
                     <td className="px-6 py-4">
-                        1
+                        11.12.2020
                     </td>
                 </tr>
                 <tr className="bg-white">
                     <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        Apple MacBook Pro 17"
+                        Хакатон
                     </th>
                     <td className="px-6 py-4">
-                        1
+                        11.12.2020
                     </td>
                 </tr>
                 <tr className="bg-white">
                     <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        Apple MacBook Pro 17"
+                        Войти в IT
                     </th>
                     <td className="px-6 py-4">
-                        1
+                        11.12.2020
                     </td>
                 </tr>
                 <tr className="bg-white">
                     <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        Apple MacBook Pro 17"
+                        Мастер классы
                     </th>
                     <td className="px-6 py-4">
-                        1
+                        11.12.2020
                     </td>
                 </tr>
                 <tr className="bg-white">
                     <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        Apple MacBook Pro 17"
+                        Войти в IT в Нижнем Новгороде
                     </th>
                     <td className="px-6 py-4">
-                        1
-                    </td>
-                </tr>
-                <tr className="bg-white">
-                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        Apple MacBook Pro 17"
-                    </th>
-                    <td className="px-6 py-4">
-                        1
-                    </td>
-                </tr>
-                <tr className="bg-white">
-                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        Apple MacBook Pro 17"
-                    </th>
-                    <td className="px-6 py-4">
-                        1
-                    </td>
-                </tr>
-                <tr className="bg-white">
-                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        Apple MacBook Pro 17"
-                    </th>
-                    <td className="px-6 py-4">
-                        1
-                    </td>
-                </tr>
-                <tr className="bg-white">
-                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        Apple MacBook Pro 17"
-                    </th>
-                    <td className="px-6 py-4">
-                        1
-                    </td>
-                </tr>
-                <tr className="bg-white">
-                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        Apple MacBook Pro 17"
-                    </th>
-                    <td className="px-6 py-4">
-                        1
-                    </td>
-                </tr>
-                <tr className="bg-white">
-                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        Apple MacBook Pro 17"
-                    </th>
-                    <td className="px-6 py-4">
-                        1
-                    </td>
-                </tr>
-                <tr className="bg-white">
-                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        Apple MacBook Pro 17"
-                    </th>
-                    <td className="px-6 py-4">
-                        1
-                    </td>
-                </tr>
-                <tr className="bg-white">
-                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        Apple MacBook Pro 17"
-                    </th>
-                    <td className="px-6 py-4">
-                        1
-                    </td>
-                </tr>
-                <tr className="bg-white">
-                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        Apple MacBook Pro 17"
-                    </th>
-                    <td className="px-6 py-4">
-                        1
-                    </td>
-                </tr>
-                <tr className="bg-white">
-                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        Apple MacBook Pro 17"
-                    </th>
-                    <td className="px-6 py-4">
-                        1
+                        11.12.2020
                     </td>
                 </tr>
 
                 <tr className="bg-white">
                     <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        Microsoft Surface Pro
+                        Новое направление разработки
                     </th>
                     <td className="px-6 py-4">
-                        1
+                        11.12.2020
                     </td>
                 </tr>
                 <tr className="bg-white">
                     <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        Magic Mouse 2
+                        Хакатон
                     </th>
                     <td className="px-6 py-4">
-                        1
+                        11.12.2020
                     </td>
                 </tr>
                 </tbody>

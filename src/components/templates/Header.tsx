@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../app/logo/general_logo.png'
+import logo from '../../app/logo/logo.png'
 
 const Header = () => {
     const handleClick = () => {
@@ -13,7 +13,7 @@ const Header = () => {
                     <div className="grid grid-cols-2 items-center gap-1">
                         <img className="h-10 w-10 ml-16 rounded" src={logo} alt='logo'/>
                         <span onClick={handleClick}
-                            className="text-2xl font-semibold whitespace-nowrap cursor-pointer">Monitoring</span>
+                            className="text-2xl font-semibold whitespace-nowrap cursor-pointer">Эталон</span>
                     </div>
                 </div>
             </nav>

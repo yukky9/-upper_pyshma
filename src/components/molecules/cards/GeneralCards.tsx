@@ -1,61 +1,130 @@
-import React from 'react';
+import React, { useState } from 'react';
+import ListItems from '../../atoms/list/ListItems';
+import ListObject from '../listObject/ListObject';
+
+interface ReportData {
+    name: string;
+    date: string;
+    procent: string;
+}
+
+interface ReportDataType {
+    [key: string]: ReportData[];
+}
 
 const GeneralCards = () => {
-    const data = [
-        {id: 1, name: 'Flowbite', date: '2021/25/09', coordinates: '269000', completeness: '49%'},
-        {id: 2, name: 'React', date: '2013/24/05', coordinates: '4500000', completeness: '24%'},
-        {id: 3, name: 'Angular', date: '2010/20/09', coordinates: '2800000', completeness: '17%'},
-        {id: 4, name: 'Vue', date: '2014/12/02', coordinates: '3600000', completeness: '30%'},
-        {id: 5, name: 'Svelte', date: '2016/26/11', coordinates: '1200000', completeness: '57%'},
-        {id: 6, name: 'Ember', date: '2011/08/12', coordinates: '500000', completeness: '44%'},
-    ];
+    const [selectedReport, setSelectedReport] = useState<string | null>(null);
 
-    const handleClick = (name: string) => {
-        window.location.href = `/object/${name}`;
+    const reportTitles = ['Объект 1', 'Объект 2', 'Объект 3', 'Объект 4', 'Объект 5', 'Объект 6','Объект 7',
+        'Объект 8', 'Объект 9','Объект 10', 'Объект 11', 'Объект 12','Объект 13', 'Объект 14', 'Объект 15','Объект 16',
+        'Объект 17', 'Объект 18', 'Объект 19', 'Объект 20'];
+
+    const reportData: ReportDataType = {
+        'Объект 1': [
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" }
+        ],
+        'Объект 2': [
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" }
+        ],
+        'Объект 3': [
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" }
+        ],
+        'Объект 4': [
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" }
+        ],
+        'Объект 5': [
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" }
+        ],
+        'Объект 6': [
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" }
+        ],
+        'Объект 7': [
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" }
+        ],
+        'Объект 8': [
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" }
+        ],
+        'Объект 9': [
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" }
+        ],
+        'Объект 10': [
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" }
+        ],
+        'Объект 11': [
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" }
+        ],
+        'Объект 12': [
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" }
+        ],
+        'Объект 13': [
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" }
+        ],
+        'Объект 14': [
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" }
+        ],
+        'Объект 15': [
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" }
+        ],
+        'Объект 16': [
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" }
+        ],
+        'Объект 17': [
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" }
+        ],
+        'Объект 18': [
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" }
+        ],
+        'Объект 19': [
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" }
+        ],
+        'Объект 20': [
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+            { name: "Отчёт 1", date: `22.12.2001`, procent: "40%" },
+        ],
+    };
+
+
+    const handleTitleClick = (title: string) => {
+        setSelectedReport(title);
     };
 
     return (
-        <div className="m-28">
-            <div className="grid mx-auto border shadow-2xl rounded-xl p-10">
-                <table className="w-full text-left">
-                    <thead>
-                    <tr className="bg-gray-200">
-                        <th className="p-2">
-                            <span className="flex items-center">
-                                Название
-                                <svg className="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                     fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
-                                          strokeWidth="2" d="m8 15 4 4 4-4m0-6-4-4-4 4"/>
-                                </svg>
-                            </span>
-                        </th>
-                        <th className="p-2" data-type="date" data-format="YYYY/DD/MM">
-                            <span className="flex items-center">
-                                Дата
-                                <svg className="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                     fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
-                                          strokeWidth="2" d="m8 15 4 4 4-4m0-6-4-4-4 4"/>
-                                </svg>
-                            </span>
-                        </th>
-                        <th className="p-2">Координаты</th>
-                        <th className="p-2">Завершенность</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {data.map(item => (
-                        <tr key={item.id} className="hover:bg-gray-100 cursor-pointer"
-                            onClick={() => handleClick(item.name)}>
-                            <td className="font-medium text-gray-900 whitespace-nowrap p-2">{item.name}</td>
-                            <td className="p-2">{item.date}</td>
-                            <td className="p-2">{item.coordinates}</td>
-                            <td className="p-2">{item.completeness}</td>
-                        </tr>
-                    ))}
-                    </tbody>
-                </table>
+        <div className="flex mx-auto ml-10 mr-10 rounded-lg shadow-lg border">
+            <ListItems reportTitles={reportTitles} onTitleClick={handleTitleClick} />
+            <div className="flex-1 p-4">
+                <h1 className="text-2xl font-semibold mb-4">{selectedReport || "Выберите отчёт"}</h1>
+                <ListObject reportData={reportData[selectedReport as string] || []} />
             </div>
         </div>
     );

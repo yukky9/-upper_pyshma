@@ -10,36 +10,9 @@ interface ReportData {
     "Процент завершенности": string;
 }
 
-interface ReportDataType {
-    [key: string]: ReportData[];
-}
-
 const GeneralCards = () => {
     const [selectedReport, setSelectedReport] = useState<string | null>(null);
     const navigate = useNavigate();
-
-    const reportTitles = [
-        "Объект 1",
-        "Объект 2",
-        "Объект 3",
-        "Объект 4",
-        "Объект 5",
-        "Объект 6",
-        "Объект 7",
-        "Объект 8",
-        "Объект 9",
-        "Объект 10",
-        "Объект 11",
-        "Объект 12",
-        "Объект 13",
-        "Объект 14",
-        "Объект 15",
-        "Объект 16",
-        "Объект 17",
-        "Объект 18",
-        "Объект 19",
-        "Объект 20",
-    ];
 
     let id = 0;
     const reportData: Report[] = [
@@ -247,7 +220,7 @@ const GeneralCards = () => {
     return (
         <div className="flex mx-auto ml-10 mr-10 rounded-lg shadow-lg border">
             <ListItems
-                reportTitles={reportTitles}
+                reportTitles={reportData.map((report) => report.name)}
                 onTitleClick={handleTitleClick}
             />
             <div className="flex-1 p-4">
@@ -255,7 +228,7 @@ const GeneralCards = () => {
                     {selectedReport || "Выберите отчёт"}
                 </h1>
                 <ListObject
-                    reportData={reportData || []}
+                    reportData={reportData}
                     onRowClick={handleRowClick}
                 />
             </div>

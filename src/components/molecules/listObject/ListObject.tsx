@@ -13,6 +13,7 @@ const names = {
     Название: "name",
     Дата: "date",
     "Процент завершенности": "complete",
+    "Проверка безопасности": "safety",
 };
 
 const ListObject = ({ reportData, onRowClick }: ListObjectProps) => {
@@ -40,10 +41,7 @@ const ListObject = ({ reportData, onRowClick }: ListObjectProps) => {
                                 {header}
                             </th>
                         ))}
-                        {/* Индикатор статуса */}
-                        <th scope="col" className="px-6 py-3 text-center">
-                            Проверка безопасности
-                        </th>
+
                         {/* Кнопка добавления отчёта */}
                         <th scope="col" className="px-6 py-3">
                             <AddReportButton />
@@ -64,16 +62,21 @@ const ListObject = ({ reportData, onRowClick }: ListObjectProps) => {
                             >
                                 {headers.map((header, headerIndex) => (
                                     <td key={headerIndex} className="px-6 py-4">
-                                        {/* @ts-ignore */}
-                                        {row[names[header]]}
+                                        {
+                                            /* @ts-ignore */
+                                            typeof row[names[header]] ===
+                                            "boolean" ? (
+                                                <Indicators
+                                                    isSafe={row.safety}
+                                                />
+                                            ) : (
+                                                /* @ts-ignore */
+                                                row[names[header]]
+                                            )
+                                        }
                                     </td>
                                 ))}
-                                {/* Индикатор статуса для каждой строки */}
-                                <td className="px-6 py-4 text-center">
-                                    <div className="flex justify-center items-center">
-                                        <Indicators isSafe={isSafe} />
-                                    </div>
-                                </td>
+
                                 {/* Пустая ячейка для выравнивания с кнопкой в заголовке */}
                                 <td className="px-6 py-4"></td>
                             </tr>

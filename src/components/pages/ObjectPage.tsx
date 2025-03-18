@@ -23,7 +23,7 @@ const SafetyObjectPage = () => {
             <Header />
             <div className="container mx-auto p-4">
                 {/* Вкладки */}
-                <div className="mb-8">
+                <div className="mb-5">
                     <div className="sm:hidden">
                         <select
                             id="tabs"

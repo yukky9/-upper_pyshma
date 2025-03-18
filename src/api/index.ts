@@ -12,11 +12,21 @@ import { ReportsApiService } from "./reports";
 const bodyToReport = (responseBody: any): Report | Report[] => {
     if (Array.isArray(responseBody)) {
         return responseBody.map((body) => ({
+            id: body.id,
+            name: body.name,
+            date: body.date,
+            complete: body.complete,
+            safety: body.safety,
             imageUrls: body.image_urls,
             fileUrl: body.file_url,
         }));
     }
     return {
+        id: responseBody.id,
+        name: responseBody.name,
+        date: responseBody.date,
+        safety: responseBody.safety,
+        complete: responseBody.complete,
         imageUrls: responseBody.image_urls,
         fileUrl: responseBody.file_url,
     };

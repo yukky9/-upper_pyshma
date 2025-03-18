@@ -1,55 +1,58 @@
 {
-  "name": "minin-code-admin",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.121",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
-    "axios": "^1.8.3",
-    "bootstrap": "^5.3.3",
-    "flowbite": "^3.1.2",
-    "framer-motion": "^12.5.0",
-    "react": "^18.3.1",
-    "react-bootstrap": "^2.10.6",
-    "react-dom": "^18.3.1",
-    "react-modal": "^3.16.1",
-    "react-router-dom": "^7.0.1",
-    "react-scripts": "5.0.1",
-    "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@types/bootstrap": "^5.2.10",
-    "@types/react-modal": "^3.16.3",
-    "tailwindcss": "^3.4.15"
-  }
+    "name": "minin-code-admin",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@testing-library/jest-dom": "^5.17.0",
+        "@testing-library/react": "^13.4.0",
+        "@testing-library/user-event": "^13.5.0",
+        "@types/jest": "^27.5.2",
+        "@types/node": "^16.18.121",
+        "@types/react": "^18.3.12",
+        "@types/react-dom": "^18.3.1",
+        "axios": "^1.8.3",
+        "bootstrap": "^5.3.3",
+        "flowbite": "^3.1.2",
+        "framer-motion": "^12.5.0",
+        "react": "^18.3.1",
+        "react-bootstrap": "^2.10.6",
+        "react-dom": "^18.3.1",
+        "react-modal": "^3.16.1",
+        "react-router-dom": "^7.0.1",
+        "react-scripts": "5.0.1",
+        "typescript": "^4.9.5",
+        "web-vitals": "^2.1.4"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "dev": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "api": "rm -rf gen/api && openapi-generator-cli generate -i http://localhost:8000/openapi.json --generator-name typescript-axios -o gen/api --config api.json && cd gen/api && bun install"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "@openapitools/openapi-generator-cli": "^2.18.4",
+        "@types/bootstrap": "^5.2.10",
+        "@types/react-modal": "^3.16.3",
+        "tailwindcss": "^3.4.15"
+    }
 }

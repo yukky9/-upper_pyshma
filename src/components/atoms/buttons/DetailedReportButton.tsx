@@ -1,10 +1,15 @@
 import React from 'react';
 
 const DetailedReportButton = () => {
+    function handleClick() {
+
+    }
+
     return (
-        <div>
-            
-        </div>
+        <button type="button" onClick={handleClick}
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 me-2 mb-2">
+            Подробный отчёт
+        </button>
     );
 };
 

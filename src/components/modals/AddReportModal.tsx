@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import CloseIconButton from '../atoms/buttons/CloseIconButton';
-import ConfirmIconButton from '../atoms/buttons/ConfirmIconButton';
+import ConfirmReportIconButton from '../atoms/buttons/ConfirmReportIconButton';
 import ImageInput from '../atoms/inputs/ImageInput';
 
 interface AddReportModalProps {
@@ -16,15 +16,14 @@ const AddReportModal: React.FC<AddReportModalProps> = ({ onConfirm, onClose, tit
 
     const handleConfirm = () => {
         if (!name.trim()) {
-            setError('Name is required');
+            setError('Название отчёта не может быть пустым');
             return;
         }
-        if (name.length < 3) {
-            setError('Name must be at least 3 characters');
-            return;
-        }
-        setError('');
+
         onConfirm(name, image || undefined); // Передаем имя и изображение (если есть)
+        setName(''); // Сброс имени
+        setImage(null); // Сброс изображения
+        setError(''); // Сброс ошибки
     };
 
     const handleImageChange = (file: File) => {
@@ -45,14 +44,17 @@ const AddReportModal: React.FC<AddReportModalProps> = ({ onConfirm, onClose, tit
                     <input
                         type="text"
                         value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        onChange={(e) => {
+                            setName(e.target.value);
+                            setError(''); // Сброс ошибки при изменении текста
+                        }}
                         placeholder="Напишите название отчёта..."
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                     {error && <p className="text-sm text-red-500 mt-1">{error}</p>}
                 </div>
                 <div className="flex justify-end">
-                    <ConfirmIconButton onClick={handleConfirm} />
+                    <ConfirmReportIconButton onClick={handleConfirm} />
                 </div>
             </div>
         </div>

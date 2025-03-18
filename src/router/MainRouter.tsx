@@ -12,7 +12,7 @@ const MainRouter = () => {
                 <Routes>
                     <Route path="/" element={<GeneralPage/>}/>
                     <Route path="/monitoring" element={<MonitoringPage/>}/>
-                    <Route path="/object/:name" element={<ObjectPage/>}/>
+                    <Route path="/object/:objectName/:reportName" element={<ObjectPage/>}/>
                 </Routes>
             </Suspense>
         </BrowserRouter>

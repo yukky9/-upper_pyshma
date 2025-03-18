@@ -10,7 +10,7 @@
     "@types/node": "^16.18.121",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
-    "axios": "^1.7.9",
+    "axios": "^1.8.3",
     "bootstrap": "^5.3.3",
     "flowbite": "^3.1.2",
     "framer-motion": "^12.5.0",

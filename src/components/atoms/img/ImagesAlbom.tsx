@@ -1,8 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 
-
-
-const ImagesAlbom = ({items}:any) => {
+const ImagesAlbum = ({ items }: any) => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const nextSlide = () => {
@@ -10,13 +8,18 @@ const ImagesAlbom = ({items}:any) => {
     };
 
     const prevSlide = () => {
-        setCurrentIndex((prevIndex) => (prevIndex - 1 + items.length) % items.length);
+        setCurrentIndex(
+            (prevIndex) => (prevIndex - 1 + items.length) % items.length
+        );
     };
 
     return (
         <div className="relative w-full overflow-hidden">
-            <div className="flex transition-transform duration-500" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
-                {items.map((item:any) => (
+            <div
+                className="flex transition-transform duration-500"
+                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+            >
+                {items.map((item: any) => (
                     <div key={item.id} className="min-w-full flex-shrink-0">
                         {item.content}
                     </div>
@@ -38,4 +41,4 @@ const ImagesAlbom = ({items}:any) => {
     );
 };
 
-export default ImagesAlbom;
+export default ImagesAlbum;

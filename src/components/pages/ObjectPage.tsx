@@ -1,21 +1,37 @@
-import React, { useState } from 'react';
-import ImagesAlbom from '../atoms/img/ImagesAlbom';
-import SafetyMainObjectPage from '../organisms/mainObjectPage/SafetyMainObjectPage';
-import MainObjectPage from '../organisms/mainObjectPage/MainObjectPage'; // Импортируем другой компонент для контента
-import Header from '../templates/Header';
+import React, { useState } from "react";
+import ImagesAlbum from "../atoms/img/ImagesAlbom";
+import SafetyMainObjectPage from "../organisms/mainObjectPage/SafetyMainObjectPage";
+import MainObjectPage from "../organisms/mainObjectPage/MainObjectPage"; // Импортируем другой компонент для контента
+import Header from "../templates/Header";
 
 const SafetyObjectPage = () => {
     const [activeTab, setActiveTab] = useState(0); // Состояние для активной вкладки
 
-    const items = [
-        { id: 1, content: <div className="h-[650px] bg-red-500 flex items-center justify-center text-white rounded-lg">Слайд 1</div> },
-        { id: 2, content: <div className="h-[650px] bg-blue-500 flex items-center justify-center text-white rounded-lg">Слайд 2</div> },
-        { id: 3, content: <div className="h-[650px] bg-green-500 flex items-center justify-center text-white rounded-lg">Слайд 3</div> },
-    ];
+    const report = {
+        id: 1,
+        name: "Отчёт 1",
+        date: `22.12.2001`,
+        complete: 40,
+        imageUrls: [],
+        fileUrl: "",
+        safety: false,
+    };
+    const items = (report.imageUrls as Array<string>).map((imageUrl) => ({
+        id: imageUrl,
+        content: <img src={imageUrl} alt="Image" className="w-full" />,
+    }));
 
     const tabs = [
-        { id: 0, label: "Контроль выполнения строительно-монтажных работ", href: "/object/:objectName/:reportName" },
-        { id: 1, label: "Анализ безопасности строительства", href: "/object/:objectName/:reportName/safety" },
+        {
+            id: 0,
+            label: "Контроль выполнения строительно-монтажных работ",
+            href: "/object/:objectName/:reportName",
+        },
+        {
+            id: 1,
+            label: "Анализ безопасности строительства",
+            href: "/object/:objectName/:reportName/safety",
+        },
     ];
 
     return (
@@ -29,7 +45,9 @@ const SafetyObjectPage = () => {
                             id="tabs"
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                             value={activeTab}
-                            onChange={(e) => setActiveTab(Number(e.target.value))}
+                            onChange={(e) =>
+                                setActiveTab(Number(e.target.value))
+                            }
                         >
                             {tabs.map((tab) => (
                                 <option key={tab.id} value={tab.id}>
@@ -40,7 +58,10 @@ const SafetyObjectPage = () => {
                     </div>
                     <ul className="hidden text-sm font-medium text-center text-gray-500 rounded-lg shadow-sm sm:flex">
                         {tabs.map((tab) => (
-                            <li key={tab.id} className="w-full focus-within:z-10">
+                            <li
+                                key={tab.id}
+                                className="w-full focus-within:z-10"
+                            >
                                 <a
                                     href={tab.href}
                                     onClick={(e) => {
@@ -63,11 +84,11 @@ const SafetyObjectPage = () => {
                 {/* Основной контент */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="bg-white p-6 rounded-lg shadow-md">
-                        <ImagesAlbom items={items} />
+                        <ImagesAlbum items={items} />
                     </div>
                     <div className="bg-white p-6 rounded-lg shadow-md">
                         {activeTab === 0 ? (
-                            <MainObjectPage /> // Контент для вкладки "Контроль выполнения строительно-монтажных работ"
+                            <MainObjectPage report={report} /> // Контент для вкладки "Контроль выполнения строительно-монтажных работ"
                         ) : (
                             <SafetyMainObjectPage /> // Контент для вкладки "Анализ безопасности строительства"
                         )}

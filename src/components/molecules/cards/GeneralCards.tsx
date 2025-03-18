@@ -139,7 +139,7 @@ const GeneralCards = () => {
         <div className="flex mx-auto ml-10 mr-10 rounded-lg shadow-lg border">
             <ListItems reportTitles={reportTitles} onTitleClick={handleTitleClick} />
             <div className="flex-1 p-4">
-                <h1 className="text-2xl font-semibold mb-4">{selectedReport || "Выберите отчёт"}</h1>
+                <h1 className="text-2xl font-semibold mb-4">{selectedReport || "Выберите объект"}</h1>
                 <ListObject reportData={reportData[selectedReport as string] || []} onRowClick={handleRowClick}/>
             </div>
         </div>

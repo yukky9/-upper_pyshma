@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import CloseIconButton from '../atoms/buttons/CloseIconButton';
-import SaveButton from '../atoms/buttons/SaveButton';
+import React, { useState } from "react";
+import CloseIconButton from "../atoms/buttons/CloseIconButton";
+import SaveButton from "../atoms/buttons/SaveButton";
 
 interface AddDownloadReportFile {
     onConfirm: (name: string, image?: File) => void; // Добавлен параметр для изображения
@@ -8,9 +8,8 @@ interface AddDownloadReportFile {
     title?: string;
 }
 
-const DownloadReportFile = ({onClose, title }:AddDownloadReportFile) => {
-
-    const [comment, setComment] = React.useState('');
+const DownloadReportFile = ({ onClose, title }: AddDownloadReportFile) => {
+    const [comment, setComment] = React.useState("");
 
     return (
         <div className="relative p-6 bg-white rounded-lg shadow-md w-full max-w-md">
@@ -27,11 +26,12 @@ const DownloadReportFile = ({onClose, title }:AddDownloadReportFile) => {
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
                         className="w-full h-[500px] p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        placeholder="Введите ваш комментарий..."
+                        disabled
+                        style={{ resize: "none" }}
                     />
                 </div>
                 <div className="flex justify-center">
-                    <SaveButton/>
+                    <SaveButton />
                 </div>
             </div>
         </div>

@@ -22,32 +22,36 @@ const SafetyMainObjectPage = () => {
                     Количество снимков: <span className="font-semibold">5</span>
                 </h3>
                 <h3 className="text-lg text-gray-700 mb-4">
-                    Количество распознанных элементов:{" "}
+                    Количество рабочих:{" "}
                     <span className="font-semibold">5</span>
                 </h3>
                 <h3 className="text-lg text-gray-700 mb-4">
-                    Количество типов элементов:{" "}
+                    Количество рабочих с правильной экипировкой:{" "}
                     <span className="font-semibold">2</span>
                 </h3>
-                <div className="mt-8">
-                    <h2 className="text-xl text-gray-800 font-semibold">
-                        Процент завершенности:{" "}
-                        <span className="text-blue-600">
-                            {completionPercentage}
-                        </span>
-                    </h2>
-                </div>
+                <h3 className="text-lg text-gray-700 mb-4">
+                    Количество рабочих с неправильной экипировкой:{" "}
+                    <span className="font-semibold">2</span>
+                </h3>
+                <h3 className="text-lg text-gray-700 mb-4">
+                    Количество нарушений рабочих:{" "}
+                    <span className="font-semibold">2</span>
+                </h3>
+                <h3 className="text-lg text-gray-700 mb-4">
+                    Количество нарушений на объекте:{" "}
+                    <span className="font-semibold">2</span>
+                </h3>
                 <div className="mt-6 flex items-center gap-3">
                     <h2 className="text-xl text-gray-800 font-semibold">
                         Проверка безопасности:
                     </h2>
-                    <Indicators isSafe={isSafe} />
+                    <Indicators isSafe={isSafe}/>
                 </div>
             </div>
 
             {/* Кнопка */}
             <div className="flex justify-center mt-8">
-                <DetailedReportButton />
+                <DetailedReportButton/>
             </div>
         </div>
     );

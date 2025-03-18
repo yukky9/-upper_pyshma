@@ -19,12 +19,12 @@ const ListObject = ({ reportData, onRowClick }: ListObjectProps) => {
     const isSafe = true;
     // Если reportData не передан, показываем сообщение
     if (!reportData) {
-        return <p className="text-gray-500">Выберите отчёт слева.</p>;
+        return <p className="text-gray-500">Выберите объект слева.</p>;
     }
 
     // Если данные пустые, показываем сообщение
     if (reportData.length === 0) {
-        return <p className="text-gray-500">Нет данных для этого отчёта.</p>;
+        return <p className="text-gray-500">Нет данных для этого объекта.</p>;
     }
 
     // Получаем заголовки таблицы из ключей первого элемента

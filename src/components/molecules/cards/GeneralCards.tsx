@@ -14,7 +14,7 @@ const GeneralCards = () => {
     const [selectedReport, setSelectedReport] = useState<string | null>(null);
     const navigate = useNavigate();
 
-    let id = 0;
+    let id = 1;
     const reportData: Report[] = [
         {
             id: id++,
@@ -220,7 +220,9 @@ const GeneralCards = () => {
     return (
         <div className="flex mx-auto ml-10 mr-10 rounded-lg shadow-lg border">
             <ListItems
-                reportTitles={reportData.map((report) => report.name)}
+                reportTitles={Array.from(Array(10).keys()).map(
+                    (i) => `Отчёт ${i + 1}`
+                )}
                 onTitleClick={handleTitleClick}
             />
             <div className="flex-1 p-4">

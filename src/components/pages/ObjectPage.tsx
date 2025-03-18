@@ -4,6 +4,13 @@ import SafetyMainObjectPage from "../organisms/mainObjectPage/SafetyMainObjectPa
 import MainObjectPage from "../organisms/mainObjectPage/MainObjectPage"; // Импортируем другой компонент для контента
 import Header from "../templates/Header";
 
+/**
+ * SafetyObjectPage - страница отчёта по объекту. Содержит
+ * информацию о выполнении строительно-монтажных работ,
+ * а также информацию о безопасности строительства.
+ *
+ * @returns JSX-элемент страницы отчёта
+ */
 const SafetyObjectPage = () => {
     const [activeTab, setActiveTab] = useState(0); // Состояние для активной вкладки
 
@@ -12,14 +19,21 @@ const SafetyObjectPage = () => {
         name: "Отчёт 1",
         date: `22.12.2001`,
         complete: 40,
-        imageUrls: [],
+        imageUrls: [
+            "https://cdn-media-1.freecodecamp.org/images/w3CWlvnWqG5VEy6qupnAYvTqECGhPdj3P9Wu",
+            "https://cdn-media-1.freecodecamp.org/images/w3CWlvnWqG5VEy6qupnAYvTqECGhPdj3P9Wu",
+        ],
         fileUrl: "",
         safety: false,
     };
-    const items = (report.imageUrls as Array<string>).map((imageUrl) => ({
-        id: imageUrl,
-        content: <img src={imageUrl} alt="Image" className="w-full" />,
-    }));
+    const items = (report.imageUrls as Array<string>).map(
+        (imageUrl, index) => ({
+            id: imageUrl,
+            content: (
+                <img src={imageUrl} alt={`index ${index}`} className="w-full" />
+            ),
+        })
+    );
 
     const tabs = [
         {

@@ -26,11 +26,9 @@ const ImageInput = ({onChange}: ImageInputProps) => {
                             file here or</h4>
                         <div className="flex items-center justify-center">
                             <label>
-                                <input type="file" hidden/>
-                                <div
-                                    className="flex w-28 h-9 px-2 flex-col bg-indigo-600 rounded-full shadow text-white text-xs font-semibold leading-4 items-center justify-center cursor-pointer focus:outline-none">Choose
-                                    File
-                                </div>
+                                <input
+                                    className="flex w-28 h-9 px-2 flex-col bg-indigo-600 rounded-full shadow text-white text-xs font-semibold leading-4 items-center justify-center cursor-pointer focus:outline-none pt-2"
+                                    type="file" multiple/>
                             </label>
                         </div>
                     </div>

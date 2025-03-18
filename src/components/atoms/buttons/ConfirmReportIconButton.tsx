@@ -10,12 +10,12 @@ const ConfirmReportIconButton = ({onClick, onClose}: ConfirmReportIconButtonProp
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
     const handleConfirm = () => {
-        window.location.href = "/monitoring";
+        window.location.href = "/";
         setIsModalOpen(false);
     };
 
     const handleClose = () => {
-        window.location.href = "/monitoring";
+        window.location.href = "/";
         setIsModalOpen(false);
     };
 

@@ -7,13 +7,13 @@ const AddReportButton = () => {
     const handleConfirm = (name: string) => {
         console.log('Новый отчёт добавлен:', name);
         setIsModalOpen(false);
-        window.location.href = "/monitoring"; // Перенаправление после подтверждения
+        window.location.href = "/"; // Перенаправление после подтверждения
     };
 
     const handleClose = () => {
         console.log('Модальное окно закрыто');
         setIsModalOpen(false);
-        window.location.href = "/monitoring"; // Перенаправление после закрытия
+        window.location.href = "/"; // Перенаправление после закрытия
     };
 
     return (

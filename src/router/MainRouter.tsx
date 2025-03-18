@@ -1,6 +1,5 @@
 import React, { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import GeneralPage from "../components/pages/GeneralPage";
 import MonitoringPage from "../components/pages/MonitoringPage";
 import ObjectPage from "../components/pages/ObjectPage";
 

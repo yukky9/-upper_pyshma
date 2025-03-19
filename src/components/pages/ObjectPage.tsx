@@ -6,6 +6,7 @@ import Header from "../templates/Header";
 import { DefaultApi } from "../../gen/api";
 import { Config } from "../../api/configuration";
 import axios from "axios";
+import { ConstructionReport } from "../../api/types";
 
 /**
  * SafetyObjectPage - страница отчёта по объекту. Содержит
@@ -19,7 +20,7 @@ const SafetyObjectPage = () => {
     const [text, setText] = useState("Загрузка...");
     const api: DefaultApi = new DefaultApi(Config);
 
-    const report = {
+    const report: ConstructionReport = {
         id: 1,
         name: "Отчёт 1",
         date: `22.12.2001`,
@@ -34,6 +35,12 @@ const SafetyObjectPage = () => {
         ],
         fileUrl: "/testreport.txt",
         safety: false,
+        workersGood: 2,
+        workersBad: 5,
+        workersViolations: 53,
+        objectViolations: 23,
+        elements: 25,
+        elementsTypes: 3,
     };
     useEffect(() => {
         axios.get(report.fileUrl).then((response) => {
@@ -43,7 +50,7 @@ const SafetyObjectPage = () => {
 
     const items = (report.imageUrls as Array<string>).map(
         (imageUrl, index) => ({
-            id: imageUrl,
+            id: imageUrl + index,
             content: (
                 <img src={imageUrl} alt={`index ${index}`} className="w-full" />
             ),

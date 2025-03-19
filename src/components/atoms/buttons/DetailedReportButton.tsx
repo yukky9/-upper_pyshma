@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import DownloadReportFile from "../../modals/DownloadReportFile";
-import { Report } from "../../../api/types";
+import { ConstructionReport } from "../../../api/types";
 
 type props = {
     reportText: string;
-    report: Report;
+    report: ConstructionReport;
 };
 
 const DetailedReportButton = ({ report, reportText }: props) => {

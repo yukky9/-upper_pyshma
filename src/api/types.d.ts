@@ -1,7 +1,7 @@
 /**
  * Represents a report with associated image URLs and a file URL.
  */
-interface Report {
+interface ConstructionReport {
     id: number;
     name: string;
     date: string;
@@ -9,6 +9,20 @@ interface Report {
     safety: boolean;
     imageUrls: Array<string>;
     fileUrl: string;
+    workersGood: number;
+    workersBad: number;
+    workersViolations: number;
+    objectViolations: number;
+    elements: number;
+    elementsTypes: number;
 }
 
-export type { Report };
+/**
+ * Represents an object with associated construction report.
+ */
+interface ConstructionObject {
+    id: string;
+    name: string;
+}
+
+export type { ConstructionReport, ConstructionObject };

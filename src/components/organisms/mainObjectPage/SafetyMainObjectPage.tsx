@@ -2,11 +2,11 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import DetailedReportButton from "../../atoms/buttons/DetailedReportButton";
 import Indicators from "../../atoms/indicators/Indicators";
-import { Report } from "../../../api/types";
+import { ConstructionReport } from "../../../api/types";
 
 type props = {
     reportText: string;
-    report: Report;
+    report: ConstructionReport;
 };
 
 const SafetyMainObjectPage = ({ reportText, report }: props) => {
@@ -32,19 +32,23 @@ const SafetyMainObjectPage = ({ reportText, report }: props) => {
                 </h3>
                 <h3 className="text-lg text-gray-700 mb-4">
                     Количество рабочих с правильной экипировкой:{" "}
-                    <span className="font-semibold">2</span>
+                    <span className="font-semibold">{report.workersGood}</span>
                 </h3>
                 <h3 className="text-lg text-gray-700 mb-4">
                     Количество рабочих с неправильной экипировкой:{" "}
-                    <span className="font-semibold">2</span>
+                    <span className="font-semibold">{report.workersBad}</span>
                 </h3>
                 <h3 className="text-lg text-gray-700 mb-4">
                     Количество нарушений рабочих:{" "}
-                    <span className="font-semibold">2</span>
+                    <span className="font-semibold">
+                        {report.workersViolations}
+                    </span>
                 </h3>
                 <h3 className="text-lg text-gray-700 mb-4">
                     Количество нарушений на объекте:{" "}
-                    <span className="font-semibold">2</span>
+                    <span className="font-semibold">
+                        {report.objectViolations}
+                    </span>
                 </h3>
                 <div className="mt-6 flex items-center gap-3">
                     <h2 className="text-xl text-gray-800 font-semibold">

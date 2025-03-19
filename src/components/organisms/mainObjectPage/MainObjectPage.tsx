@@ -1,9 +1,9 @@
 import React from "react";
 import DetailedReportButton from "../../atoms/buttons/DetailedReportButton";
 import { useLocation } from "react-router-dom";
-import { Report } from "../../../api/types";
+import { ConstructionReport } from "../../../api/types";
 
-type props = { report: Report; reportText: string };
+type props = { report: ConstructionReport; reportText: string };
 
 const MainObjectPage = ({ report, reportText }: props) => {
     const location = useLocation();
@@ -29,7 +29,7 @@ const MainObjectPage = ({ report, reportText }: props) => {
                 </h3>
                 <h3 className="text-lg text-gray-700 mb-4">
                     Количество распознанных элементов:{" "}
-                    <span className="font-semibold">5</span>
+                    <span className="font-semibold">${"0"}</span>
                 </h3>
                 <h3 className="text-lg text-gray-700 mb-4">
                     Количество типов элементов:{" "}

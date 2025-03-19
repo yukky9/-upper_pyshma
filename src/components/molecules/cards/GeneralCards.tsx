@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ListItems from "../../atoms/list/ListItems";
 import ListObject from "../listObject/ListObject";
-import { Report } from "../../../api/types";
+import { ConstructionObject, ConstructionReport } from "../../../api/types";
+import { wait } from "../../../api/util";
 
 interface ReportData {
     Название: string;
@@ -13,193 +14,50 @@ interface ReportData {
 const GeneralCards = () => {
     const [selectedReport, setSelectedReport] = useState<string | null>(null);
     const navigate = useNavigate();
+    const [reportData, setReportData] = useState<ConstructionReport[]>([]);
+    const [objects, setObjects] = useState<ConstructionObject[]>([]);
+    const [selectedObject, setSelectedObject] = useState<number | null>(null);
 
-    let id = 1;
-    const reportData: Report[] = [
-        {
-            id: id++,
-            name: "Отчёт 1",
-            date: `22.12.2001`,
-            complete: 40,
-            imageUrls: [],
-            fileUrl: "",
-            safety: false,
-        },
-        {
-            id: id++,
-            name: "Отчёт 2",
-            date: `22.12.2001`,
-            complete: 50,
-            imageUrls: [],
-            fileUrl: "",
-            safety: true,
-        },
-        {
-            id: id++,
-            name: "Отчёт 3",
-            date: `22.12.2001`,
-            complete: 60,
-            imageUrls: [],
-            fileUrl: "",
-            safety: true,
-        },
-        {
-            id: id++,
-            name: "Отчёт 4",
-            date: `22.12.2001`,
-            complete: 75,
-            imageUrls: [],
-            fileUrl: "",
-            safety: false,
-        },
-        {
-            id: id++,
-            name: "Отчёт 5",
-            date: `22.12.2001`,
-            complete: 35,
-            imageUrls: [],
-            fileUrl: "",
-            safety: true,
-        },
-        {
-            id: id++,
-            name: "Отчёт 6",
-            date: `22.12.2001`,
-            complete: 40,
-            imageUrls: [],
-            fileUrl: "",
-            safety: true,
-        },
-        {
-            id: id++,
-            name: "Отчёт 7",
-            date: `22.12.2001`,
-            complete: 40,
-            imageUrls: [],
-            fileUrl: "",
-            safety: true,
-        },
-        {
-            id: id++,
-            name: "Отчёт 8",
-            date: `22.12.2001`,
-            complete: 40,
-            imageUrls: [],
-            fileUrl: "",
-            safety: true,
-        },
-        {
-            id: id++,
-            name: "Отчёт 9",
-            date: `22.12.2001`,
-            complete: 40,
-            imageUrls: [],
-            fileUrl: "",
-            safety: true,
-        },
-        {
-            id: id++,
-            name: "Отчёт 10",
-            date: `22.12.2001`,
-            complete: 40,
-            imageUrls: [],
-            fileUrl: "",
-            safety: true,
-        },
-        {
-            id: id++,
-            name: "Отчёт 11",
-            date: `22.12.2001`,
-            complete: 40,
-            imageUrls: [],
-            fileUrl: "",
-            safety: false,
-        },
-        {
-            id: id++,
-            name: "Отчёт 12",
-            date: `22.12.2001`,
-            complete: 40,
-            imageUrls: [],
-            fileUrl: "",
-            safety: true,
-        },
-        {
-            id: id++,
-            name: "Отчёт 13",
-            date: `22.12.2001`,
-            complete: 40,
-            imageUrls: [],
-            fileUrl: "",
-            safety: true,
-        },
-        {
-            id: id++,
-            name: "Отчёт 14",
-            date: `22.12.2001`,
-            complete: 40,
-            imageUrls: [],
-            fileUrl: "",
-            safety: false,
-        },
-        {
-            id: id++,
-            name: "Отчёт 15",
-            date: `22.12.2001`,
-            complete: 40,
-            imageUrls: [],
-            fileUrl: "",
-            safety: true,
-        },
-        {
-            id: id++,
-            name: "Отчёт 16",
-            date: `22.12.2001`,
-            complete: 40,
-            imageUrls: [],
-            fileUrl: "",
-            safety: false,
-        },
-        {
-            id: id++,
-            name: "Отчёт 17",
-            date: `22.12.2001`,
-            complete: 40,
-            imageUrls: [],
-            fileUrl: "",
-            safety: false,
-        },
-        {
-            id: id++,
-            name: "Отчёт 18",
-            date: `22.12.2001`,
-            complete: 40,
-            imageUrls: [],
-            fileUrl: "",
-            safety: false,
-        },
-        {
-            id: id++,
-            name: "Отчёт 19",
-            date: `22.12.2001`,
-            complete: 40,
-            imageUrls: [],
-            fileUrl: "",
-            safety: false,
-        },
-        {
-            id: id++,
-            name: "Отчёт 20",
-            date: `22.12.2001`,
-            complete: 40,
-            imageUrls: [],
-            fileUrl: "",
-            safety: false,
-        },
-    ];
+    React.useEffect(() => {
+        wait(100).then(() => {
+            setObjects(
+                Array(10)
+                    .fill(1)
+                    .map(
+                        (_, index): ConstructionObject => ({
+                            id: crypto.randomUUID(),
+                            name: `Объект ${index + 1}`,
+                        })
+                    )
+            );
+        });
+    }, []);
 
-    const handleTitleClick = (title: string) => {
-        setSelectedReport(title);
+    const handleTitleClick = (id: number) => {
+        setSelectedReport(objects[id].name);
+        wait(100).then(() =>
+            setReportData(
+                Array(10)
+                    .fill(1)
+                    .map(
+                        (_, index): ConstructionReport => ({
+                            id: index + 1,
+                            name: objects[id].name,
+                            date: `22.12.2001`,
+                            complete: Math.floor(Math.random() * 100),
+                            imageUrls: [],
+                            fileUrl: "",
+                            safety: Math.random() < 0.5,
+                            workersGood: Math.floor(Math.random() * 50),
+                            workersBad: Math.floor(Math.random() * 50),
+                            workersViolations: Math.floor(Math.random() * 20),
+                            objectViolations: Math.floor(Math.random() * 20),
+                            elements: Math.floor(Math.random() * 100),
+                            elementsTypes: Math.floor(Math.random() * 10),
+                        })
+                    )
+            )
+        );
     };
 
     const handleRowClick = (id: number) => {
@@ -220,9 +78,7 @@ const GeneralCards = () => {
     return (
         <div className="flex mx-auto ml-10 mr-10 rounded-lg shadow-lg border">
             <ListItems
-                reportTitles={Array.from(Array(10).keys()).map(
-                    (i) => `Отчёт ${i + 1}`
-                )}
+                reportTitles={objects.map((i) => i.name)}
                 onTitleClick={handleTitleClick}
             />
             <div className="flex-1 p-4">

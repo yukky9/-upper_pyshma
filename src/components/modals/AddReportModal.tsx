@@ -1,33 +1,45 @@
-import React, { useState } from 'react';
-import CloseIconButton from '../atoms/buttons/CloseIconButton';
-import ConfirmReportIconButton from '../atoms/buttons/ConfirmReportIconButton';
-import ImageInput from '../atoms/inputs/ImageInput';
+import React, { useState } from "react";
+import CloseIconButton from "../atoms/buttons/CloseIconButton";
+import ImageInput from "../atoms/inputs/ImageInput";
+import { Api } from "../../api/configuration";
+import { ConstructionReport } from "../../api/types";
+import ConfirmReportIconButton from "../atoms/buttons/ConfirmReportIconButton";
 
 interface AddReportModalProps {
     onConfirm: (name: string, image?: File) => void; // Добавлен параметр для изображения
     onClose: () => void;
     title?: string;
+    objectId: string;
 }
 
-const AddReportModal: React.FC<AddReportModalProps> = ({ onConfirm, onClose, title }) => {
-    const [name, setName] = useState<string>('');
-    const [image, setImage] = useState<File | null>(null); // Состояние для изображения
-    const [error, setError] = useState<string>('');
-
-    const handleConfirm = () => {
-        if (!name.trim()) {
-            setError('Название отчёта не может быть пустым');
+const AddReportModal: React.FC<AddReportModalProps> = ({
+    onConfirm,
+    onClose,
+    title,
+    objectId,
+}) => {
+    const [image, setImage] = useState<File[]>([]); // Состояние для изображения
+    const [error, setError] = useState<string>("");
+    console.log(objectId);
+    const handleConfirm = async () => {
+        if (image.length === 0) {
+            setError("Изображение не может быть пустым");
             return;
         }
+        let len = 0;
+        image.forEach((i) => (len += i.size));
+        console.log(len);
+        Api.reports
+            .reportCreateApiReportsCreateObjectIdPost(objectId, image, {
+                headers: {
+                    "Content-Length": len,
+                },
+            })
+            .then(console.log)
+            .then(() => onConfirm("asd", image[0]));
 
-        onConfirm(name, image || undefined); // Передаем имя и изображение (если есть)
-        setName(''); // Сброс имени
-        setImage(null); // Сброс изображения
-        setError(''); // Сброс ошибки
-    };
-
-    const handleImageChange = (file: File) => {
-        setImage(file); // Обновляем состояние изображения
+        setImage([]); // Сброс изображения
+        setError(""); // Сброс ошибки
     };
 
     return (
@@ -38,7 +50,11 @@ const AddReportModal: React.FC<AddReportModalProps> = ({ onConfirm, onClose, tit
             {title && <h2 className="text-lg font-semibold mb-4">{title}</h2>}
             <div className="grid gap-2">
                 <div>
-                    <ImageInput onChange={handleImageChange} />
+                    <ImageInput
+                        onChange={(e) => {
+                            setImage(e);
+                        }}
+                    />
                 </div>
                 <div className="flex justify-center">
                     <ConfirmReportIconButton onClick={handleConfirm} />

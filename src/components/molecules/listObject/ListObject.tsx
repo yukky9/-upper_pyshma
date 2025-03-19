@@ -4,6 +4,7 @@ import Indicators from "../../atoms/indicators/Indicators";
 import { ConstructionReport } from "../../../api/types";
 
 interface ListObjectProps {
+    objectId: string;
     reportData?: ConstructionReport[]; // Уточнение типа для reportData
     onRowClick?: (reportName: number) => void; // Функция для обработки клика по строке
 }
@@ -16,16 +17,16 @@ const names = {
     "Проверка безопасности": "safety",
 };
 
-const ListObject = ({ reportData, onRowClick }: ListObjectProps) => {
+const ListObject = ({ reportData, onRowClick, objectId }: ListObjectProps) => {
     // Если reportData не передан, показываем сообщение
     if (!reportData) {
         return <p className="text-gray-500">Выберите объект слева.</p>;
     }
 
     // Если данные пустые, показываем сообщение
-    if (reportData.length === 0) {
-        return <p className="text-gray-500">Нет данных для этого объекта.</p>;
-    }
+    // if (reportData.length === 0) {
+    //     return <p className="text-gray-500">Нет данных для этого объекта.</p>;
+    // }
 
     // Получаем заголовки таблицы из ключей первого элемента
     const headers = Object.keys(names);
@@ -50,7 +51,7 @@ const ListObject = ({ reportData, onRowClick }: ListObjectProps) => {
                             scope="col"
                             className="px-6 py-3 text-center align-middle" // Выравнивание по центру
                         >
-                            <AddReportButton />
+                            <AddReportButton objectId={objectId} />
                         </th>
                     </tr>
                 </thead>

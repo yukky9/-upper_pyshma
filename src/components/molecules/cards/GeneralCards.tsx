@@ -3,55 +3,46 @@ import { useNavigate } from "react-router-dom";
 import ListItems from "../../atoms/list/ListItems";
 import ListObject from "../listObject/ListObject";
 import { ConstructionObject, ConstructionReport } from "../../../api/types";
-import { wait } from "../../../api/util";
+import { ObjectsApi, ReportsApi } from "../../../gen/api";
+import { Api, Config } from "../../../api/configuration";
 
 const GeneralCards = () => {
-    const [selectedReport, setSelectedReport] = useState<string | null>(null);
     const navigate = useNavigate();
     const [reportData, setReportData] = useState<ConstructionReport[]>([]);
     const [objects, setObjects] = useState<ConstructionObject[]>([]);
     const [selectedObject, setSelectedObject] = useState<number | null>(null);
 
     React.useEffect(() => {
-        wait(100).then(() => {
-            setObjects(
-                Array(10)
-                    .fill(1)
-                    .map(
-                        (_, index): ConstructionObject => ({
-                            id: crypto.randomUUID(),
-                            name: `Объект ${index + 1}`,
-                        })
-                    )
-            );
-        });
+        Api.objects
+            .objectsListApiObjectsListGet()
+            .then((res) => setObjects(res.data.objects));
     }, []);
 
     const handleTitleClick = (id: number) => {
         setSelectedObject(id);
-        wait(100).then(() =>
-            setReportData(
-                Array(10)
-                    .fill(1)
-                    .map(
-                        (_, index): ConstructionReport => ({
-                            id: index + 1,
+        Api.reports
+            .reportsListApiReportsListObjectIdGet(objects[id].id)
+            .then((res) =>
+                setReportData(
+                    res.data.reports.map(
+                        (el): ConstructionReport => ({
+                            id: el.id,
                             name: objects[id].name,
-                            date: `22.12.2001`,
-                            complete: Math.floor(Math.random() * 100),
-                            imageUrls: [],
+                            date: el.created_at,
+                            complete: 0,
+                            imageUrls: Array(el.photo_amount).fill("/"),
                             fileUrl: "",
-                            safety: Math.random() < 0.5,
-                            workersGood: Math.floor(Math.random() * 50),
-                            workersBad: Math.floor(Math.random() * 50),
-                            workersViolations: Math.floor(Math.random() * 20),
-                            objectViolations: Math.floor(Math.random() * 20),
-                            elements: Math.floor(Math.random() * 100),
-                            elementsTypes: Math.floor(Math.random() * 10),
+                            safety: el.is_safe === 1,
+                            workersGood: 0,
+                            workersBad: 0,
+                            workersViolations: 0,
+                            objectViolations: 0,
+                            elements: 0,
+                            elementsTypes: 0,
                         })
                     )
-            )
-        );
+                )
+            );
     };
 
     const handleRowClick = (id: number) => {
@@ -59,11 +50,11 @@ const GeneralCards = () => {
             (report) => report.id === id
         );
 
-        navigate(`/object/${selectedReport}/${id}`, {
+        navigate(`/object/${objects[selectedObject!].id}/${id}`, {
             state: {
                 reportDate: selectedReportData?.date, // Передаём дату
                 reportName: selectedReportData?.name, // Передаём название отчёта
-                objectName: selectedReport, // Передаём название объекта
+                objectName: objects[selectedObject!].name, // Передаём название объекта
                 completionPercentage: selectedReportData?.complete, // Передаём процент завершённости
             },
         });
@@ -77,9 +68,16 @@ const GeneralCards = () => {
             />
             <div className="flex-1 p-4">
                 <h1 className="text-2xl font-semibold mb-4">
-                    {selectedReport || "Выберите отчёт"}
+                    {selectedObject !== null
+                        ? objects[selectedObject].name
+                        : "Выберите отчёт"}
                 </h1>
                 <ListObject
+                    objectId={
+                        selectedObject !== null
+                            ? objects[selectedObject].id
+                            : ""
+                    }
                     reportData={reportData}
                     onRowClick={handleRowClick}
                 />

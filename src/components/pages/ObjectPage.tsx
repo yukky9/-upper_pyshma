@@ -5,7 +5,8 @@ import MainObjectPage from "../organisms/mainObjectPage/MainObjectPage"; // Им
 import Header from "../templates/Header";
 import axios from "axios";
 import { ConstructionReport } from "../../api/types";
-import { wait } from "@testing-library/user-event/dist/utils";
+import { Api } from "../../api/configuration";
+import { useParams } from "react-router-dom";
 
 /**
  * SafetyObjectPage - страница отчёта по объекту. Содержит
@@ -18,37 +19,51 @@ const SafetyObjectPage = () => {
     const [activeTab, setActiveTab] = useState(0); // Состояние для активной вкладки
     const [text, setText] = useState("Загрузка...");
     const [report, setReport] = useState<ConstructionReport | null>(null);
+    const params = useParams();
 
     useEffect(() => {
-        wait(100).then(() => {
-            const res: ConstructionReport = {
-                id: 1,
-                name: "Отчёт 1",
-                date: `22.12.2001`,
-                complete: Math.floor(Math.random() * 100),
-                imageUrls: [
-                    "https://cdn-media-1.freecodecamp.org/images/w3CWlvnWqG5VEy6qupnAYvTqECGhPdj3P9Wu",
-                    "https://cdn-media-1.freecodecamp.org/images/w3CWlvnWqG5VEy6qupnAYvTqECGhPdj3P9Wu",
-                    "https://cdn-media-1.freecodecamp.org/images/w3CWlvnWqG5VEy6qupnAYvTqECGhPdj3P9Wu",
-                    "https://cdn-media-1.freecodecamp.org/images/w3CWlvnWqG5VEy6qupnAYvTqECGhPdj3P9Wu",
-                    "https://cdn-media-1.freecodecamp.org/images/w3CWlvnWqG5VEy6qupnAYvTqECGhPdj3P9Wu",
-                    "https://cdn-media-1.freecodecamp.org/images/w3CWlvnWqG5VEy6qupnAYvTqECGhPdj3P9Wu",
-                ],
-                fileUrl: "/testreport.txt",
-                safety: Math.random() > 0.5,
-                workersGood: Math.floor(Math.random() * 50),
-                workersBad: Math.floor(Math.random() * 50),
-                workersViolations: Math.floor(Math.random() * 20),
-                objectViolations: Math.floor(Math.random() * 20),
-                elements: Math.floor(Math.random() * 100),
-                elementsTypes: Math.floor(Math.random() * 10),
-            };
-            setReport(res);
-            axios.get(res.fileUrl).then((response) => {
-                setText(response.data);
+        Api.reports
+            .reportGetApiReportsGetObjectIdReportIdGet(
+                params["objectName"]!,
+                Number.parseInt(params["reportName"]!)
+            )
+            .then((res) => {
+                const rep: ConstructionReport = {
+                    id: Number.parseInt(params["reportName"]!),
+                    name: res.data.object_name,
+                    date: res.data.created_at,
+                    complete: res.data.construction_report.completeness,
+                    imageUrls: res.data.urls[
+                        activeTab === 1 ? "safety" : "construction"
+                    ]
+                        .filter(
+                            (val) =>
+                                val.endsWith(".jpg") || val.endsWith(".png")
+                        )
+                        .map(
+                            (el) => `${Api.BASE_URI}/api/reports/download/${el}`
+                        ),
+                    fileUrl: res.data.urls[
+                        activeTab === 1 ? "safety" : "construction"
+                    ].filter((val) => val.endsWith(".txt"))[0],
+                    safety: res.data.safety_report.is_safe === 1,
+                    workersGood: res.data.safety_report.good_workers_amount,
+                    workersBad: res.data.safety_report.bad_workers_amount,
+                    workersViolations:
+                        res.data.safety_report.workers_violation_amount,
+                    objectViolations:
+                        res.data.safety_report.object_violation_amount,
+                    elements: res.data.construction_report.known_amount,
+                    elementsTypes: res.data.construction_report.types_amount,
+                };
+                setReport(rep);
+                Api.reports
+                    .downloadFileApiReportsDownloadPathGet(rep.fileUrl)
+                    .then((response) => {
+                        setText(response.data);
+                    });
             });
-        });
-    }, []);
+    }, [activeTab]);
 
     const items = (report?.imageUrls ?? []).map((imageUrl, index) => ({
         id: imageUrl + index,

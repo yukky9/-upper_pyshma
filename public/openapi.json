@@ -1,0 +1,568 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "Etalon API",
+        "license": {
+            "name": "MIT License",
+            "url": "https://opensource.org/licenses/MIT"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/": {
+            "get": {
+                "tags": ["default"],
+                "summary": "Root",
+                "operationId": "root__get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DefaultRootRs"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/ping": {
+            "get": {
+                "tags": ["default"],
+                "summary": "Ping",
+                "operationId": "ping_api_ping_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DefaultPingRs"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/objects/create": {
+            "post": {
+                "tags": ["objects"],
+                "summary": "Object Create",
+                "operationId": "object_create_api_objects_create_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ObjectsCreateRq"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ObjectsCreateRs"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/objects/list": {
+            "get": {
+                "tags": ["objects"],
+                "summary": "Objects List",
+                "operationId": "objects_list_api_objects_list_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ObjectsListRs"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/reports/create/{object_id}": {
+            "post": {
+                "tags": ["reports"],
+                "summary": "Report Create",
+                "operationId": "report_create_api_reports_create__object_id__post",
+                "parameters": [
+                    {
+                        "name": "object_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Object Id"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Body_report_create_api_reports_create__object_id__post"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ReportsCreateRs"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/reports/list/{object_id}": {
+            "get": {
+                "tags": ["reports"],
+                "summary": "Reports List",
+                "operationId": "reports_list_api_reports_list__object_id__get",
+                "parameters": [
+                    {
+                        "name": "object_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Object Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ReportsListRs"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/reports/get/{object_id}/{report_id}": {
+            "get": {
+                "tags": ["reports"],
+                "summary": "Report Get",
+                "operationId": "report_get_api_reports_get__object_id___report_id__get",
+                "parameters": [
+                    {
+                        "name": "object_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Object Id"
+                        }
+                    },
+                    {
+                        "name": "report_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Report Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ReportsGetRs"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/reports/download/{path}": {
+            "get": {
+                "tags": ["reports"],
+                "summary": "Report Download",
+                "operationId": "report_download_api_reports_download__path__get",
+                "parameters": [
+                    {
+                        "name": "path",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Path"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Body_report_create_api_reports_create__object_id__post": {
+                "properties": {
+                    "files": {
+                        "items": {
+                            "type": "string",
+                            "format": "binary"
+                        },
+                        "type": "array",
+                        "title": "Files"
+                    }
+                },
+                "type": "object",
+                "required": ["files"],
+                "title": "Body_report_create_api_reports_create__object_id__post"
+            },
+            "Construction": {
+                "properties": {
+                    "known_amount": {
+                        "type": "integer",
+                        "title": "Known Amount"
+                    },
+                    "types_amount": {
+                        "type": "integer",
+                        "title": "Types Amount"
+                    },
+                    "completeness": {
+                        "type": "integer",
+                        "title": "Completeness"
+                    }
+                },
+                "type": "object",
+                "required": ["known_amount", "types_amount", "completeness"],
+                "title": "Construction"
+            },
+            "DefaultPingRs": {
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "title": "Status"
+                    }
+                },
+                "type": "object",
+                "required": ["status"],
+                "title": "DefaultPingRs"
+            },
+            "DefaultRootRs": {
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "title": "Status"
+                    },
+                    "current_time": {
+                        "type": "string",
+                        "title": "Current Time"
+                    }
+                },
+                "type": "object",
+                "required": ["status", "current_time"],
+                "title": "DefaultRootRs"
+            },
+            "HTTPValidationError": {
+                "properties": {
+                    "detail": {
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationError"
+                        },
+                        "type": "array",
+                        "title": "Detail"
+                    }
+                },
+                "type": "object",
+                "title": "HTTPValidationError"
+            },
+            "Objects": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "title": "Id"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    }
+                },
+                "type": "object",
+                "required": ["id", "name"],
+                "title": "Objects"
+            },
+            "ObjectsCreateRq": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    }
+                },
+                "type": "object",
+                "required": ["name"],
+                "title": "ObjectsCreateRq"
+            },
+            "ObjectsCreateRs": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "title": "Id"
+                    }
+                },
+                "type": "object",
+                "required": ["id"],
+                "title": "ObjectsCreateRs"
+            },
+            "ObjectsListRs": {
+                "properties": {
+                    "objects": {
+                        "items": {
+                            "$ref": "#/components/schemas/Objects"
+                        },
+                        "type": "array",
+                        "title": "Objects"
+                    }
+                },
+                "type": "object",
+                "required": ["objects"],
+                "title": "ObjectsListRs"
+            },
+            "Reports": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "title": "Id"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "title": "Created At"
+                    },
+                    "photo_amount": {
+                        "type": "integer",
+                        "title": "Photo Amount"
+                    },
+                    "is_safe": {
+                        "type": "integer",
+                        "title": "Is Safe"
+                    }
+                },
+                "type": "object",
+                "required": ["id", "created_at", "photo_amount", "is_safe"],
+                "title": "Reports"
+            },
+            "ReportsCreateRs": {
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "title": "Status"
+                    }
+                },
+                "type": "object",
+                "required": ["status"],
+                "title": "ReportsCreateRs"
+            },
+            "ReportsGetRs": {
+                "properties": {
+                    "object_name": {
+                        "type": "string",
+                        "title": "Object Name"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "title": "Created At"
+                    },
+                    "photo_amount": {
+                        "type": "integer",
+                        "title": "Photo Amount"
+                    },
+                    "construction_report": {
+                        "$ref": "#/components/schemas/Construction"
+                    },
+                    "safety_report": {
+                        "$ref": "#/components/schemas/Safety"
+                    },
+                    "urls": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Urls"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "object_name",
+                    "created_at",
+                    "photo_amount",
+                    "construction_report",
+                    "safety_report",
+                    "urls"
+                ],
+                "title": "ReportsGetRs"
+            },
+            "ReportsListRs": {
+                "properties": {
+                    "reports": {
+                        "items": {
+                            "$ref": "#/components/schemas/Reports"
+                        },
+                        "type": "array",
+                        "title": "Reports"
+                    }
+                },
+                "type": "object",
+                "required": ["reports"],
+                "title": "ReportsListRs"
+            },
+            "Safety": {
+                "properties": {
+                    "workers_amount": {
+                        "type": "integer",
+                        "title": "Workers Amount"
+                    },
+                    "good_workers_amount": {
+                        "type": "integer",
+                        "title": "Good Workers Amount"
+                    },
+                    "bad_workers_amount": {
+                        "type": "integer",
+                        "title": "Bad Workers Amount"
+                    },
+                    "workers_violation_amount": {
+                        "type": "integer",
+                        "title": "Workers Violation Amount"
+                    },
+                    "object_violation_amount": {
+                        "type": "integer",
+                        "title": "Object Violation Amount"
+                    },
+                    "is_safe": {
+                        "type": "integer",
+                        "title": "Is Safe"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "workers_amount",
+                    "good_workers_amount",
+                    "bad_workers_amount",
+                    "workers_violation_amount",
+                    "object_violation_amount",
+                    "is_safe"
+                ],
+                "title": "Safety"
+            },
+            "ValidationError": {
+                "properties": {
+                    "loc": {
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ]
+                        },
+                        "type": "array",
+                        "title": "Location"
+                    },
+                    "msg": {
+                        "type": "string",
+                        "title": "Message"
+                    },
+                    "type": {
+                        "type": "string",
+                        "title": "Error Type"
+                    }
+                },
+                "type": "object",
+                "required": ["loc", "msg", "type"],
+                "title": "ValidationError"
+            }
+        }
+    }
+}

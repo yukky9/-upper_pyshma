@@ -1,0 +1,39 @@
+Construction site report
+Date: 2023-02-15
+=========================
+Site name: Random construction site
+
+Number of workers: 23
+
+Number of supervisors: 2
+
+Number of excavators: 4
+
+Number of cranes: 1
+
+Number of forklifts: 1
+
+Number of trucks: 7
+
+Number of trailers: 5
+
+Number of total hours worked: 350
+
+Total cost of materials: $12,000
+
+Total cost of labor: $50,000
+
+Total cost of equipment rental: $10,000
+
+Total cost of fuel: $5,000
+
+Total cost of maintenance: $2,000
+
+Total cost of miscellaneous expenses: $1,000
+
+Total project cost: $70,000
+
+Total project completion percentage: 30%
+
+Total project time remaining: 70 days
+=========================

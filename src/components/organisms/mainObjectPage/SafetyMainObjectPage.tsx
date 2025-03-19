@@ -2,8 +2,14 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import DetailedReportButton from "../../atoms/buttons/DetailedReportButton";
 import Indicators from "../../atoms/indicators/Indicators";
+import { Report } from "../../../api/types";
 
-const SafetyMainObjectPage = () => {
+type props = {
+    reportText: string;
+    report: Report;
+};
+
+const SafetyMainObjectPage = ({ reportText, report }: props) => {
     const location = useLocation();
     const { objectName, reportName, reportDate, completionPercentage, isSafe } =
         location.state;
@@ -22,8 +28,7 @@ const SafetyMainObjectPage = () => {
                     Количество снимков: <span className="font-semibold">5</span>
                 </h3>
                 <h3 className="text-lg text-gray-700 mb-4">
-                    Количество рабочих:{" "}
-                    <span className="font-semibold">5</span>
+                    Количество рабочих: <span className="font-semibold">5</span>
                 </h3>
                 <h3 className="text-lg text-gray-700 mb-4">
                     Количество рабочих с правильной экипировкой:{" "}
@@ -45,13 +50,13 @@ const SafetyMainObjectPage = () => {
                     <h2 className="text-xl text-gray-800 font-semibold">
                         Проверка безопасности:
                     </h2>
-                    <Indicators isSafe={isSafe}/>
+                    <Indicators isSafe={isSafe} />
                 </div>
             </div>
 
             {/* Кнопка */}
             <div className="flex justify-center mt-8">
-                <DetailedReportButton/>
+                <DetailedReportButton report={report} reportText={reportText} />
             </div>
         </div>
     );

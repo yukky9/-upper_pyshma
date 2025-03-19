@@ -1,8 +1,11 @@
-import React, { useState } from "react";
-import ImagesAlbum from "../atoms/img/ImagesAlbom";
+import React, { useEffect, useState } from "react";
+import ImagesAlbum from "../atoms/img/ImagesAlbum";
 import SafetyMainObjectPage from "../organisms/mainObjectPage/SafetyMainObjectPage";
 import MainObjectPage from "../organisms/mainObjectPage/MainObjectPage"; // Импортируем другой компонент для контента
 import Header from "../templates/Header";
+import { DefaultApi } from "../../gen/api";
+import { Config } from "../../api/configuration";
+import axios from "axios";
 
 /**
  * SafetyObjectPage - страница отчёта по объекту. Содержит
@@ -13,6 +16,8 @@ import Header from "../templates/Header";
  */
 const SafetyObjectPage = () => {
     const [activeTab, setActiveTab] = useState(0); // Состояние для активной вкладки
+    const [text, setText] = useState("Загрузка...");
+    const api: DefaultApi = new DefaultApi(Config);
 
     const report = {
         id: 1,
@@ -27,9 +32,15 @@ const SafetyObjectPage = () => {
             "https://cdn-media-1.freecodecamp.org/images/w3CWlvnWqG5VEy6qupnAYvTqECGhPdj3P9Wu",
             "https://cdn-media-1.freecodecamp.org/images/w3CWlvnWqG5VEy6qupnAYvTqECGhPdj3P9Wu",
         ],
-        fileUrl: "",
+        fileUrl: "/testreport.txt",
         safety: false,
     };
+    useEffect(() => {
+        axios.get(report.fileUrl).then((response) => {
+            setText(response.data);
+        });
+    });
+
     const items = (report.imageUrls as Array<string>).map(
         (imageUrl, index) => ({
             id: imageUrl,
@@ -106,9 +117,12 @@ const SafetyObjectPage = () => {
                     </div>
                     <div className="bg-white p-6 rounded-lg shadow-md">
                         {activeTab === 0 ? (
-                            <MainObjectPage report={report} /> // Контент для вкладки "Контроль выполнения строительно-монтажных работ"
+                            <MainObjectPage report={report} reportText={text} /> // Контент для вкладки "Контроль выполнения строительно-монтажных работ"
                         ) : (
-                            <SafetyMainObjectPage /> // Контент для вкладки "Анализ безопасности строительства"
+                            <SafetyMainObjectPage
+                                report={report}
+                                reportText={text}
+                            /> // Контент для вкладки "Анализ безопасности строительства"
                         )}
                     </div>
                 </div>

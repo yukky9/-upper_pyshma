@@ -3,9 +3,9 @@ import DetailedReportButton from "../../atoms/buttons/DetailedReportButton";
 import { useLocation } from "react-router-dom";
 import { Report } from "../../../api/types";
 
-type props = { report: Report };
+type props = { report: Report; reportText: string };
 
-const MainObjectPage = ({ report }: props) => {
+const MainObjectPage = ({ report, reportText }: props) => {
     const location = useLocation();
     const { objectName, reportName, reportDate, completionPercentage } =
         location.state;
@@ -46,7 +46,7 @@ const MainObjectPage = ({ report }: props) => {
                 </div>
             </div>
             <div className="flex justify-center mt-8">
-                <DetailedReportButton />
+                <DetailedReportButton report={report} reportText={reportText} />
             </div>
         </div>
     );

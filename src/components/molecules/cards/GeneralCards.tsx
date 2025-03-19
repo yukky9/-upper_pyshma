@@ -7,7 +7,7 @@ import { Report } from "../../../api/types";
 interface ReportData {
     Название: string;
     Дата: string;
-    "Процент завершенности": string;
+    "Количество фотографий": string;
 }
 
 const GeneralCards = () => {

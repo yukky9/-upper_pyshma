@@ -12,7 +12,7 @@ const names = {
     ID: "id",
     Название: "name",
     Дата: "date",
-    "Процент завершенности": "complete",
+    "Количество фотографий": "complete",
     "Проверка безопасности": "safety",
 };
 
@@ -35,53 +35,65 @@ const ListObject = ({ reportData, onRowClick }: ListObjectProps) => {
         <div className="overflow-x-auto shadow-md sm:rounded-lg overflow-y-auto h-[700px]">
             <table className="w-full text-sm text-left text-gray-500">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 sticky top-0">
-                    <tr>
-                        {headers.map((header, index) => (
-                            <th key={index} scope="col" className="px-6 py-3">
-                                {header}
-                            </th>
-                        ))}
-
-                        {/* Кнопка добавления отчёта */}
-                        <th scope="col" className="px-6 py-3">
-                            <AddReportButton />
+                <tr>
+                    {headers.map((header, index) => (
+                        <th
+                            key={index}
+                            scope="col"
+                            className="px-6 py-3 text-center align-middle" // Выравнивание по центру
+                        >
+                            {header}
                         </th>
-                    </tr>
+                    ))}
+
+                    {/* Кнопка добавления отчёта */}
+                    <th
+                        scope="col"
+                        className="px-6 py-3 text-center align-middle" // Выравнивание по центру
+                    >
+                        <AddReportButton />
+                    </th>
+                </tr>
                 </thead>
                 <tbody>
-                    {reportData.map((row, index) => {
-                        return (
-                            <tr
-                                key={index}
-                                className="bg-white border-b hover:bg-gray-50 cursor-pointer"
-                                onClick={
-                                    onRowClick
-                                        ? () => onRowClick(row.id)
-                                        : undefined
-                                } // Обработка клика по строке
-                            >
-                                {headers.map((header, headerIndex) => (
-                                    <td key={headerIndex} className="px-6 py-4">
-                                        {
-                                            /* @ts-ignore */
-                                            typeof row[names[header]] ===
-                                            "boolean" ? (
+                {reportData.map((row, index) => {
+                    return (
+                        <tr
+                            key={index}
+                            className="bg-white border-b hover:bg-gray-50 cursor-pointer"
+                            onClick={
+                                onRowClick
+                                    ? () => onRowClick(row.id)
+                                    : undefined
+                            } // Обработка клика по строке
+                        >
+                            {headers.map((header, headerIndex) => (
+                                <td
+                                    key={headerIndex}
+                                    className="px-6 py-4 text-center align-middle" // Выравнивание по центру
+                                >
+                                    {
+                                        /* @ts-ignore */
+                                        typeof row[names[header]] ===
+                                        "boolean" ? (
+                                            <div className="flex justify-center items-center"> {/* Контейнер для центрирования индикатора */}
                                                 <Indicators
                                                     isSafe={row.safety}
                                                 />
-                                            ) : (
-                                                /* @ts-ignore */
-                                                row[names[header]]
-                                            )
-                                        }
-                                    </td>
-                                ))}
+                                            </div>
+                                        ) : (
+                                            /* @ts-ignore */
+                                            row[names[header]]
+                                        )
+                                    }
+                                </td>
+                            ))}
 
-                                {/* Пустая ячейка для выравнивания с кнопкой в заголовке */}
-                                <td className="px-6 py-4"></td>
-                            </tr>
-                        );
-                    })}
+                            {/* Пустая ячейка для выравнивания с кнопкой в заголовке */}
+                            <td className="px-6 py-4 text-center align-middle"></td>
+                        </tr>
+                    );
+                })}
                 </tbody>
             </table>
         </div>

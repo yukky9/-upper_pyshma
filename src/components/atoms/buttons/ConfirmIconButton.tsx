@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import AddReportModal from '../../modals/AddReportModal';
 
 
 interface ConfirmIconButtonProps {
@@ -7,22 +6,10 @@ interface ConfirmIconButtonProps {
 }
 
 const ConfirmIconButton = ({onClick}: ConfirmIconButtonProps) => {
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-    const handleConfirm = (name: string) => {
-        console.log('Confirmed:', name);
-        setIsModalOpen(false);
-    };
-
-    const handleClose = () => {
-        console.log('Modal closed');
-        setIsModalOpen(false);
-    };
-
 
     return (
         <div>
-            <button onClick={() => setIsModalOpen(true)}
+            <button onClick={onClick}
                 className="bg-green-500 w-96 h-11 mt-10 border border-green-700 rounded-lg flex items-center justify-center cursor-pointer transition-all duration-500">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -30,15 +17,6 @@ const ConfirmIconButton = ({onClick}: ConfirmIconButtonProps) => {
                         stroke="black" stroke-width="null" stroke-linecap="round" className="my-path"></path>
                 </svg>
             </button>
-            {isModalOpen && (
-                <div className="fixed inset-0 flex items-center justify-center z-50">
-                    <AddReportModal
-                        onConfirm={handleConfirm}
-                        onClose={handleClose}
-                        title="Добавить новый отчёт"
-                    />
-                </div>
-            )}
         </div>
     );
 };

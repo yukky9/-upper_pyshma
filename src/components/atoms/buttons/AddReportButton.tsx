@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
-import AddReportModal from '../../modals/AddReportModal';
-
-const AddReportButton = () => {
+import React, { useState } from "react";
+import AddReportModal from "../../modals/AddReportModal";
+import { ConstructionReport } from "../../../api/types";
+type params = {
+    objectId: string;
+};
+const AddReportButton = ({ objectId }: params) => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
     const handleConfirm = (name: string) => {
-        console.log('Новый отчёт добавлен:', name);
+        console.log("Новый отчёт добавлен:", name);
         setIsModalOpen(false);
         window.location.href = "/"; // Перенаправление после подтверждения
     };
 
     const handleClose = () => {
-        console.log('Модальное окно закрыто');
+        console.log("Модальное окно закрыто");
         setIsModalOpen(false);
         window.location.href = "/"; // Перенаправление после закрытия
     };
@@ -20,7 +23,10 @@ const AddReportButton = () => {
         <div>
             <button
                 type="button"
-                onClick={() => setIsModalOpen(true)}
+                onClick={
+                    objectId === "" ? undefined : () => setIsModalOpen(true)
+                }
+                disabled={objectId === ""}
                 className="w-full h-11 flex items-center justify-center cursor-pointer transition-all duration-500 hover:bg-gray-50"
             >
                 <svg
@@ -39,15 +45,16 @@ const AddReportButton = () => {
                     />
                 </svg>
             </button>
-            {isModalOpen && (
+            {isModalOpen ? (
                 <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
                     <AddReportModal
                         title="Добавить новый отчёт"
                         onClose={handleClose}
                         onConfirm={handleConfirm}
+                        objectId={objectId}
                     />
                 </div>
-            )}
+            ) : undefined}
         </div>
     );
 };

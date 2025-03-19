@@ -12,6 +12,7 @@
         "@types/react-dom": "^18.3.1",
         "axios": "^1.8.3",
         "bootstrap": "^5.3.3",
+        "fastify": "^5.2.1",
         "flowbite": "^3.1.2",
         "framer-motion": "^12.5.0",
         "react": "^18.3.1",
@@ -25,11 +26,10 @@
     },
     "scripts": {
         "start": "react-scripts start",
-        "dev": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "api": "rm -rf src/gen/api && openapi-generator-cli generate -i http://localhost:3000/openapi.json --generator-name typescript-axios -o src/gen/api --config api.json && cd gen/api && bun install"
+        "api": "rm -rf src/gen/api && openapi-generator-cli generate -i https://api.penki.tech/api/openapi.json --generator-name typescript-axios -o src/gen/api --config api.json "
     },
     "eslintConfig": {
         "extends": [

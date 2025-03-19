@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import ConfirmIconButton from '../atoms/buttons/ConfirmIconButton';
-import CloseIconButton from '../atoms/buttons/CloseIconButton'; // Assume this component exists
-import NameInput from '../atoms/inputs/NameInput';
+import React, { useState } from "react";
+import ConfirmIconButton from "../atoms/buttons/ConfirmIconButton";
+import CloseIconButton from "../atoms/buttons/CloseIconButton"; // Assume this component exists
+import NameInput from "../atoms/inputs/NameInput";
+import { Api } from "../../api/configuration";
 
 interface AddNewObjectModalProps {
     onConfirm: (name: string) => void;
@@ -9,21 +10,37 @@ interface AddNewObjectModalProps {
     title?: string;
 }
 
-const AddNewObjectModal: React.FC<AddNewObjectModalProps> = ({ onConfirm, onClose, title }) => {
-    const [name, setName] = useState<string>('');
-    const [error, setError] = useState<string>('');
+const AddNewObjectModal: React.FC<AddNewObjectModalProps> = ({
+    onConfirm,
+    onClose,
+    title,
+}) => {
+    const [name, setName] = useState<string>("");
+    const [error, setError] = useState<string>("");
 
     const handleConfirm = () => {
         if (!name.trim()) {
-            setError('Name is required');
+            setError("Name is required");
             return;
         }
         if (name.length < 3) {
-            setError('Name must be at least 3 characters');
+            setError("Name must be at least 3 characters");
             return;
         }
-        setError('');
-        onConfirm(name);
+        setError("");
+        Api.objects
+            .objectCreateApiObjectsCreatePost({
+                name,
+            })
+            .then((res) => {
+                console.log(res);
+                onConfirm(name);
+            })
+            .catch((err) => {
+                console.log(err);
+                setError("Произошла ошибка");
+            });
+        window.location.reload();
     };
 
     return (

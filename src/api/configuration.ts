@@ -1,5 +1,11 @@
-import { Configuration } from "../gen/api";
+import { Configuration, ObjectsApi, ReportsApi } from "../gen/api";
 
 export const Config = new Configuration({
-    basePath: "http://localhost:8080",
+    basePath: "https://api.penki.tech",
 });
+
+export const Api = {
+    reports: new ReportsApi(Config, "https://api.penki.tech"),
+    objects: new ObjectsApi(Config, "https://api.penki.tech"),
+    BASE_URI: "https://api.penki.tech",
+};

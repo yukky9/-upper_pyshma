@@ -68,7 +68,7 @@ const SafetyObjectPage = () => {
     const items = (report?.imageUrls ?? []).map((imageUrl, index) => ({
         id: imageUrl + index,
         content: (
-            <img src={imageUrl} alt={`index ${index}`} className="w-full" />
+            <img src={imageUrl} alt={`index ${index}`} className="w-full max-h-[500px]" />
         ),
     }));
 

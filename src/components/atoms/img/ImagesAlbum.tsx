@@ -55,11 +55,13 @@ const ImagesAlbum = ({ items }: any) => {
                             className="max-w-full flex-shrink-0 cursor-pointer flex justify-center items-center"
                             onClick={() => openModal(index)}
                         >
-                            <img
-                                src={item.content.props.src} // Предполагаем, что item.content — это <img>
-                                alt={`Slide ${index}`}
-                                className="max-w-full max-h-[500px] object-contain" // Ограничение размера изображения
-                            />
+                            <div className="max-w-full max-h-[500px] overflow-auto">
+                                <img
+                                    src={item.content.props.src} // Предполагаем, что item.content — это <img>
+                                    alt={`Slide ${index}`}
+                                    className="max-w-full object-contain" // Ограничение размера изображения
+                                />
+                            </div>
                         </div>
                     ))}
                 </div>
@@ -86,7 +88,7 @@ const ImagesAlbum = ({ items }: any) => {
                     onClick={closeModal}
                 >
                     <div
-                        className="relative max-w-4xl max-h-[90vh] overflow-auto"
+                        className="relative max-w-4xl max-h-[90vh] w-full"
                         onClick={(e) => e.stopPropagation()}
                     >
                         {/* Кнопка закрытия */}
@@ -108,11 +110,13 @@ const ImagesAlbum = ({ items }: any) => {
                                     key={item.id}
                                     className="min-w-full flex-shrink-0 flex justify-center items-center"
                                 >
-                                    <img
-                                        src={item.content.props.src} // Предполагаем, что item.content — это <img>
-                                        alt={`Slide ${index}`}
-                                        className="max-w-full max-h-[80vh] object-contain" // Ограничение размера изображения
-                                    />
+                                    <div className="max-w-full max-h-[80vh] overflow-auto">
+                                        <img
+                                            src={item.content.props.src} // Предполагаем, что item.content — это <img>
+                                            alt={`Slide ${index}`}
+                                            className="max-w-full object-contain" // Ограничение размера изображения
+                                        />
+                                    </div>
                                 </div>
                             ))}
                         </div>

@@ -7,9 +7,7 @@ type props = { report: ConstructionReport; reportText: string };
 
 const MainObjectPage = ({ report, reportText }: props) => {
     const location = useLocation();
-    const { objectName, reportName, reportDate, completionPercentage } =
-        location.state;
-    const isSafe = true;
+    const { objectName, reportName, reportDate } = location.state;
 
     return (
         <div className="flex flex-col items-center justify-center h-[650px] bg-gray-50 p-6">
@@ -29,11 +27,13 @@ const MainObjectPage = ({ report, reportText }: props) => {
                 </h3>
                 <h3 className="text-lg text-gray-700 mb-4">
                     Количество распознанных элементов:{" "}
-                    <span className="font-semibold">${"0"}</span>
+                    <span className="font-semibold">{report.elements}</span>
                 </h3>
                 <h3 className="text-lg text-gray-700 mb-4">
                     Количество типов элементов:{" "}
-                    <span className="font-semibold">2</span>
+                    <span className="font-semibold">
+                        {report.elementsTypes}
+                    </span>
                 </h3>
 
                 <div className="mt-8">

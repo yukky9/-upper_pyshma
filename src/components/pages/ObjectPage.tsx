@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ImagesAlbum from "../atoms/img/ImagesAlbum";
 import SafetyMainObjectPage from "../organisms/mainObjectPage/SafetyMainObjectPage";
 import MainObjectPage from "../organisms/mainObjectPage/MainObjectPage"; // Импортируем другой компонент для контента
 import Header from "../templates/Header";
-import { DefaultApi } from "../../gen/api";
-import { Config } from "../../api/configuration";
 import axios from "axios";
 import { ConstructionReport } from "../../api/types";
+import { wait } from "@testing-library/user-event/dist/utils";
 
 /**
  * SafetyObjectPage - страница отчёта по объекту. Содержит
@@ -18,44 +17,45 @@ import { ConstructionReport } from "../../api/types";
 const SafetyObjectPage = () => {
     const [activeTab, setActiveTab] = useState(0); // Состояние для активной вкладки
     const [text, setText] = useState("Загрузка...");
-    const api: DefaultApi = new DefaultApi(Config);
+    const [report, setReport] = useState<ConstructionReport | null>(null);
 
-    const report: ConstructionReport = {
-        id: 1,
-        name: "Отчёт 1",
-        date: `22.12.2001`,
-        complete: 40,
-        imageUrls: [
-            "https://cdn-media-1.freecodecamp.org/images/w3CWlvnWqG5VEy6qupnAYvTqECGhPdj3P9Wu",
-            "https://cdn-media-1.freecodecamp.org/images/w3CWlvnWqG5VEy6qupnAYvTqECGhPdj3P9Wu",
-            "https://cdn-media-1.freecodecamp.org/images/w3CWlvnWqG5VEy6qupnAYvTqECGhPdj3P9Wu",
-            "https://cdn-media-1.freecodecamp.org/images/w3CWlvnWqG5VEy6qupnAYvTqECGhPdj3P9Wu",
-            "https://cdn-media-1.freecodecamp.org/images/w3CWlvnWqG5VEy6qupnAYvTqECGhPdj3P9Wu",
-            "https://cdn-media-1.freecodecamp.org/images/w3CWlvnWqG5VEy6qupnAYvTqECGhPdj3P9Wu",
-        ],
-        fileUrl: "/testreport.txt",
-        safety: false,
-        workersGood: 2,
-        workersBad: 5,
-        workersViolations: 53,
-        objectViolations: 23,
-        elements: 25,
-        elementsTypes: 3,
-    };
     useEffect(() => {
-        axios.get(report.fileUrl).then((response) => {
-            setText(response.data);
+        wait(100).then(() => {
+            const res: ConstructionReport = {
+                id: 1,
+                name: "Отчёт 1",
+                date: `22.12.2001`,
+                complete: Math.floor(Math.random() * 100),
+                imageUrls: [
+                    "https://cdn-media-1.freecodecamp.org/images/w3CWlvnWqG5VEy6qupnAYvTqECGhPdj3P9Wu",
+                    "https://cdn-media-1.freecodecamp.org/images/w3CWlvnWqG5VEy6qupnAYvTqECGhPdj3P9Wu",
+                    "https://cdn-media-1.freecodecamp.org/images/w3CWlvnWqG5VEy6qupnAYvTqECGhPdj3P9Wu",
+                    "https://cdn-media-1.freecodecamp.org/images/w3CWlvnWqG5VEy6qupnAYvTqECGhPdj3P9Wu",
+                    "https://cdn-media-1.freecodecamp.org/images/w3CWlvnWqG5VEy6qupnAYvTqECGhPdj3P9Wu",
+                    "https://cdn-media-1.freecodecamp.org/images/w3CWlvnWqG5VEy6qupnAYvTqECGhPdj3P9Wu",
+                ],
+                fileUrl: "/testreport.txt",
+                safety: Math.random() > 0.5,
+                workersGood: Math.floor(Math.random() * 50),
+                workersBad: Math.floor(Math.random() * 50),
+                workersViolations: Math.floor(Math.random() * 20),
+                objectViolations: Math.floor(Math.random() * 20),
+                elements: Math.floor(Math.random() * 100),
+                elementsTypes: Math.floor(Math.random() * 10),
+            };
+            setReport(res);
+            axios.get(res.fileUrl).then((response) => {
+                setText(response.data);
+            });
         });
-    });
+    }, []);
 
-    const items = (report.imageUrls as Array<string>).map(
-        (imageUrl, index) => ({
-            id: imageUrl + index,
-            content: (
-                <img src={imageUrl} alt={`index ${index}`} className="w-full" />
-            ),
-        })
-    );
+    const items = (report?.imageUrls ?? []).map((imageUrl, index) => ({
+        id: imageUrl + index,
+        content: (
+            <img src={imageUrl} alt={`index ${index}`} className="w-full" />
+        ),
+    }));
 
     const tabs = [
         {
@@ -123,7 +123,9 @@ const SafetyObjectPage = () => {
                         <ImagesAlbum items={items} />
                     </div>
                     <div className="bg-white p-6 rounded-lg shadow-md">
-                        {activeTab === 0 ? (
+                        {!report ? (
+                            "Загрузка..."
+                        ) : activeTab === 0 ? (
                             <MainObjectPage report={report} reportText={text} /> // Контент для вкладки "Контроль выполнения строительно-монтажных работ"
                         ) : (
                             <SafetyMainObjectPage

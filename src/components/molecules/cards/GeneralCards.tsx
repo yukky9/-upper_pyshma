@@ -5,12 +5,6 @@ import ListObject from "../listObject/ListObject";
 import { ConstructionObject, ConstructionReport } from "../../../api/types";
 import { wait } from "../../../api/util";
 
-interface ReportData {
-    Название: string;
-    Дата: string;
-    "Количество фотографий": string;
-}
-
 const GeneralCards = () => {
     const [selectedReport, setSelectedReport] = useState<string | null>(null);
     const navigate = useNavigate();
@@ -34,7 +28,7 @@ const GeneralCards = () => {
     }, []);
 
     const handleTitleClick = (id: number) => {
-        setSelectedReport(objects[id].name);
+        setSelectedObject(id);
         wait(100).then(() =>
             setReportData(
                 Array(10)

@@ -11,8 +11,7 @@ type props = {
 
 const SafetyMainObjectPage = ({ reportText, report }: props) => {
     const location = useLocation();
-    const { objectName, reportName, reportDate, completionPercentage, isSafe } =
-        location.state;
+    const { objectName, reportName, reportDate } = location.state;
 
     return (
         <div className="flex flex-col items-center justify-center h-[650px] bg-gray-50 p-6">
@@ -25,10 +24,16 @@ const SafetyMainObjectPage = ({ reportText, report }: props) => {
             </div>
             <div className="bg-white rounded-lg shadow-md p-6 mx-auto w-full max-w-2xl">
                 <h3 className="text-lg text-gray-700 mb-4">
-                    Количество снимков: <span className="font-semibold">5</span>
+                    Количество снимков:{" "}
+                    <span className="font-semibold">
+                        {report.imageUrls.length}
+                    </span>
                 </h3>
                 <h3 className="text-lg text-gray-700 mb-4">
-                    Количество рабочих: <span className="font-semibold">5</span>
+                    Количество рабочих:{" "}
+                    <span className="font-semibold">
+                        {report.workersBad + report.workersGood}
+                    </span>
                 </h3>
                 <h3 className="text-lg text-gray-700 mb-4">
                     Количество рабочих с правильной экипировкой:{" "}
@@ -54,7 +59,7 @@ const SafetyMainObjectPage = ({ reportText, report }: props) => {
                     <h2 className="text-xl text-gray-800 font-semibold">
                         Проверка безопасности:
                     </h2>
-                    <Indicators isSafe={isSafe} />
+                    <Indicators isSafe={report.safety} />
                 </div>
             </div>
 

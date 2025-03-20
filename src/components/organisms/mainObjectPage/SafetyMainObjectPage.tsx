@@ -12,6 +12,7 @@ type props = {
 const SafetyMainObjectPage = ({ reportText, report }: props) => {
     const location = useLocation();
     const { objectName, reportName, reportDate } = location.state;
+    console.log(report.workersGood, typeof report.workersGood);
 
     return (
         <div className="flex flex-col items-center justify-center h-[650px] bg-gray-50 p-6">
@@ -30,10 +31,8 @@ const SafetyMainObjectPage = ({ reportText, report }: props) => {
                     </span>
                 </h3>
                 <h3 className="text-lg text-gray-700 mb-4">
-                    Количество рабочих:{" "}
-                    <span className="font-semibold">
-                        {report.workersBad + report.workersGood}
-                    </span>
+                    Количество рабочих:
+                    <span className="font-semibold">{report.workersGood}</span>
                 </h3>
                 {/* <h3 className="text-lg text-gray-700 mb-4">
                     Количество рабочих с правильной экипировкой:{" "}

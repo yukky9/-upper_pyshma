@@ -47,8 +47,8 @@ const SafetyObjectPage = () => {
                         activeTab === 1 ? "safety" : "construction"
                     ].filter((val) => val.endsWith(".txt"))[0],
                     safety: res.data.safety_report.is_safe === 1,
-                    workersGood: res.data.safety_report.good_workers_amount,
-                    workersBad: res.data.safety_report.bad_workers_amount,
+                    workersGood: res.data.safety_report.workers_amount,
+                    workersBad: 0,
                     workersViolations:
                         res.data.safety_report.workers_violation_amount,
                     objectViolations:
@@ -68,7 +68,11 @@ const SafetyObjectPage = () => {
     const items = (report?.imageUrls ?? []).map((imageUrl, index) => ({
         id: imageUrl + index,
         content: (
-            <img src={imageUrl} alt={`index ${index}`} className="w-full max-h-[500px]" />
+            <img
+                src={imageUrl}
+                alt={`index ${index}`}
+                className="w-full max-h-[500px]"
+            />
         ),
     }));
 

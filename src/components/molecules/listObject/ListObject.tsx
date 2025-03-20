@@ -7,17 +7,23 @@ interface ListObjectProps {
     objectId: string;
     reportData?: ConstructionReport[]; // Уточнение типа для reportData
     onRowClick?: (reportName: number) => void; // Функция для обработки клика по строке
+    onReportAdd: (a: number) => void;
 }
 
 const names = {
     ID: "id",
-    Название: "name",
+    // Название: "name",
     Дата: "date",
     Завершенность: "complete",
     "Проверка безопасности": "safety",
 };
 
-const ListObject = ({ reportData, onRowClick, objectId }: ListObjectProps) => {
+const ListObject = ({
+    reportData,
+    onRowClick,
+    objectId,
+    onReportAdd,
+}: ListObjectProps) => {
     // Если reportData не передан, показываем сообщение
     if (!reportData) {
         return <p className="text-gray-500">Выберите объект слева.</p>;
@@ -51,7 +57,10 @@ const ListObject = ({ reportData, onRowClick, objectId }: ListObjectProps) => {
                             scope="col"
                             className="px-6 py-3 text-center align-middle" // Выравнивание по центру
                         >
-                            <AddReportButton objectId={objectId} />
+                            <AddReportButton
+                                objectId={objectId}
+                                onConfirm={onReportAdd}
+                            />
                         </th>
                     </tr>
                 </thead>

@@ -1,22 +1,28 @@
 import React, { useState } from "react";
 import AddReportModal from "../../modals/AddReportModal";
 import { ConstructionReport } from "../../../api/types";
+import { useNavigate } from "react-router-dom";
 type params = {
+    onConfirm: (a: number) => void;
     objectId: string;
 };
-const AddReportButton = ({ objectId }: params) => {
+const AddReportButton = ({ objectId, onConfirm }: params) => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const navigate = useNavigate();
 
-    const handleConfirm = (name: string) => {
+    const handleConfirm = (name: number) => {
         console.log("Новый отчёт добавлен:", name);
         setIsModalOpen(false);
-        window.location.href = "/"; // Перенаправление после подтверждения
+        // navigate("/?objectId=" + objectId, {
+        //     state: { objectId: objectId },
+        //     preventScrollReset: true,
+        // });
+        onConfirm(name);
     };
 
     const handleClose = () => {
         console.log("Модальное окно закрыто");
         setIsModalOpen(false);
-        window.location.href = "/"; // Перенаправление после закрытия
     };
 
     return (

@@ -4,9 +4,11 @@ import ImageInput from "../atoms/inputs/ImageInput";
 import { Api } from "../../api/configuration";
 import { ConstructionReport } from "../../api/types";
 import ConfirmReportIconButton from "../atoms/buttons/ConfirmReportIconButton";
+import { wait } from "../../api/util";
+import { useNavigate } from "react-router-dom";
 
 interface AddReportModalProps {
-    onConfirm: (name: string, image?: File) => void; // Добавлен параметр для изображения
+    onConfirm: (name: number) => void; // Добавлен параметр для изображения
     onClose: () => void;
     title?: string;
     objectId: string;
@@ -20,6 +22,7 @@ const AddReportModal: React.FC<AddReportModalProps> = ({
 }) => {
     const [image, setImage] = useState<File[]>([]); // Состояние для изображения
     const [error, setError] = useState<string>("");
+    const navigate = useNavigate();
     console.log(objectId);
     const handleConfirm = async () => {
         if (image.length === 0) {
@@ -29,14 +32,12 @@ const AddReportModal: React.FC<AddReportModalProps> = ({
         let len = 0;
         image.forEach((i) => (len += i.size));
         console.log(len);
-        Api.reports
-            .reportCreateApiReportsCreateObjectIdPost(objectId, image, {
-                headers: {
-                    "Content-Length": len,
-                },
-            })
-            .then(console.log)
-            .then(() => onConfirm("asd", image[0]));
+        const res = await Api.reports.reportCreateApiReportsCreateObjectIdPost(
+            objectId,
+            image
+        );
+        // navigate("/?objectId=" + objectId, { state: { objectId: objectId } });
+        onConfirm(res.data.report_id);
 
         setImage([]); // Сброс изображения
         setError(""); // Сброс ошибки

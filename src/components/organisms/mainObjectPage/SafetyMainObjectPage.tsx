@@ -35,14 +35,14 @@ const SafetyMainObjectPage = ({ reportText, report }: props) => {
                         {report.workersBad + report.workersGood}
                     </span>
                 </h3>
-                <h3 className="text-lg text-gray-700 mb-4">
+                {/* <h3 className="text-lg text-gray-700 mb-4">
                     Количество рабочих с правильной экипировкой:{" "}
                     <span className="font-semibold">{report.workersGood}</span>
                 </h3>
                 <h3 className="text-lg text-gray-700 mb-4">
                     Количество рабочих с неправильной экипировкой:{" "}
                     <span className="font-semibold">{report.workersBad}</span>
-                </h3>
+                </h3> */}
                 <h3 className="text-lg text-gray-700 mb-4">
                     Количество нарушений рабочих:{" "}
                     <span className="font-semibold">
